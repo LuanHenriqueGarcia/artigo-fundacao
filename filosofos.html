@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grandes Filósofos</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #0b0a07;
+        --bg2: #111008;
+        --bg3: #16140f;
+        --bg4: #1c1910;
+        --border: #252218;
+        --border2: #2e2a1e;
+        --gold: #c8a97e;
+        --gold2: #a8864e;
+        --text: #e8e0d0;
+        --text2: #b0a890;
+        --text3: #777060;
+        --text4: #4a4538;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* ── HEADER ── */
+      header {
+        position: relative;
+        text-align: center;
+        padding: 70px 40px 60px;
+        border-bottom: 1px solid var(--border);
+        background: linear-gradient(180deg, #0b0a07 0%, #111008 100%);
+        overflow: hidden;
+      }
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 50px;
+        background: linear-gradient(to bottom, transparent, var(--gold));
+        opacity: 0.5;
+      }
+      header::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+          ellipse 60% 40% at 50% 0%,
+          rgba(200, 169, 126, 0.04),
+          transparent
+        );
+        pointer-events: none;
+      }
+      .header-eyebrow {
+        font-family: "Cinzel", serif;
+        font-size: 10px;
+        letter-spacing: 6px;
+        color: var(--gold);
+        opacity: 0.65;
+        text-transform: uppercase;
+        margin-bottom: 22px;
+        animation: fadeDown 0.8s ease both;
+      }
+      h1 {
+        font-family: "Cinzel", serif;
+        font-size: clamp(36px, 7vw, 80px);
+        font-weight: 900;
+        letter-spacing: 5px;
+        color: var(--text);
+        line-height: 1.05;
+        animation: fadeDown 0.8s 0.1s ease both;
+      }
+      .header-sub {
+        font-size: 18px;
+        font-style: italic;
+        color: var(--text3);
+        margin-top: 16px;
+        font-weight: 300;
+        animation: fadeDown 0.8s 0.2s ease both;
+      }
+      .header-line {
+        width: 80px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        margin: 32px auto 0;
+        animation: scaleX 0.8s 0.3s ease both;
+        transform-origin: center;
+      }
+
+      /* ── STATS ── */
+      .stats {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        border-bottom: 1px solid var(--border);
+        overflow: hidden;
+      }
+      .stat {
+        flex: 1;
+        max-width: 180px;
+        text-align: center;
+        padding: 28px 20px;
+        border-right: 1px solid var(--border);
+        transition: background 0.2s;
+      }
+      .stat:last-child {
+        border-right: none;
+      }
+      .stat:hover {
+        background: var(--bg3);
+      }
+      .stat-num {
+        font-family: "Cinzel", serif;
+        font-size: 30px;
+        color: var(--gold);
+        font-weight: 600;
+        line-height: 1;
+      }
+      .stat-label {
+        font-family: "Cinzel", serif;
+        font-size: 8px;
+        letter-spacing: 3px;
+        color: var(--text4);
+        text-transform: uppercase;
+        margin-top: 6px;
+      }
+
+      /* ── FILTERS ── */
+      .filters {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 36px 24px;
+        flex-wrap: wrap;
+      }
+      .filter-btn {
+        padding: 7px 20px;
+        background: transparent;
+        border: 1px solid var(--border2);
+        color: var(--text3);
+        cursor: pointer;
+        font-family: "Cinzel", serif;
+        font-size: 9px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        border-radius: 2px;
+        transition: all 0.2s;
+      }
+      .filter-btn:hover {
+        color: var(--text);
+        border-color: var(--text4);
+      }
+      .filter-btn.active {
+        background: var(--bg4);
+        color: var(--text);
+        border-color: var(--text4);
+      }
+
+      /* ── GRID ── */
+      .grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+      }
+
+      /* ── CARD ── */
+      .card {
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        overflow: hidden;
+        cursor: pointer;
+        transition:
+          transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+          border-color 0.35s,
+          box-shadow 0.35s;
+        position: relative;
+        animation: fadeUp 0.6s ease both;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--c);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s ease;
+        z-index: 2;
+      }
+      .card:hover {
+        transform: translateY(-7px);
+        border-color: var(--ca);
+        box-shadow:
+          0 24px 60px rgba(0, 0, 0, 0.55),
+          0 0 0 1px var(--ca);
+      }
+      .card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .card-img {
+        height: 240px;
+        overflow: hidden;
+        background: var(--bg);
+        position: relative;
+      }
+      .card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        filter: sepia(15%) contrast(1.08);
+        transition: transform 0.6s ease;
+        display: block;
+      }
+      .card:hover .card-img img {
+        transform: scale(1.06);
+      }
+      .card-img-fade {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60%;
+        background: linear-gradient(to top, var(--bg3), transparent);
+      }
+      .card-era-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        padding: 3px 10px;
+        background: rgba(0, 0, 0, 0.65);
+        border: 1px solid var(--c);
+        font-family: "Cinzel", serif;
+        font-size: 8px;
+        letter-spacing: 2px;
+        color: var(--c);
+        text-transform: uppercase;
+        backdrop-filter: blur(4px);
+      }
+
+      .card-body {
+        padding: 24px;
+      }
+      .card-period {
+        font-family: "Cinzel", serif;
+        font-size: 9px;
+        letter-spacing: 3px;
+        color: var(--c);
+        opacity: 0.75;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+      }
+      .card-name {
+        font-family: "Cinzel", serif;
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 6px;
+        letter-spacing: 1px;
+      }
+      .card-school {
+        font-size: 13px;
+        color: var(--text3);
+        font-style: italic;
+        margin-bottom: 20px;
+      }
+      .card-quote {
+        border-left: 2px solid var(--c);
+        padding-left: 14px;
+        margin-bottom: 20px;
+      }
+      .card-quote p {
+        font-size: 15px;
+        font-style: italic;
+        color: #c0b090;
+        line-height: 1.55;
+      }
+      .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .card-count {
+        font-family: "Cinzel", serif;
+        font-size: 8px;
+        letter-spacing: 2px;
+        color: var(--text4);
+        text-transform: uppercase;
+      }
+      .card-cta {
+        font-family: "Cinzel", serif;
+        font-size: 8px;
+        letter-spacing: 2px;
+        color: var(--c);
+        opacity: 0.8;
+        text-transform: uppercase;
+      }
+
+      /* ── MODAL OVERLAY ── */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.88);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        backdrop-filter: blur(5px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .overlay.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      /* ── MODAL ── */
+      .modal {
+        background: #0e0c08;
+        border: 1px solid var(--border2);
+        max-width: 860px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        border-radius: 3px;
+        transform: translateY(30px);
+        transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+      .overlay.open .modal {
+        transform: translateY(0);
+      }
+
+      .modal::-webkit-scrollbar {
+        width: 4px;
+      }
+      .modal::-webkit-scrollbar-track {
+        background: #111;
+      }
+      .modal::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 2px;
+      }
+
+      .modal-header {
+        display: flex;
+        gap: 24px;
+        padding: 32px;
+        border-bottom: 1px solid var(--border);
+        background: var(--bg);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .modal-photo {
+        width: 96px;
+        height: 116px;
+        object-fit: cover;
+        object-position: top;
+        filter: sepia(15%) contrast(1.1);
+        flex-shrink: 0;
+        border: 1px solid var(--mc);
+        display: block;
+      }
+      .modal-meta {
+        flex: 1;
+        min-width: 0;
+      }
+      .modal-period {
+        font-family: "Cinzel", serif;
+        font-size: 9px;
+        letter-spacing: 3px;
+        color: var(--mc);
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+      .modal-name {
+        font-family: "Cinzel", serif;
+        font-size: clamp(20px, 4vw, 30px);
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: var(--text);
+        margin-bottom: 6px;
+      }
+      .modal-school {
+        font-size: 13px;
+        color: var(--text3);
+        font-style: italic;
+        margin-bottom: 14px;
+      }
+      .modal-quote-box {
+        background: var(--bg3);
+        border-left: 3px solid var(--mc);
+        padding: 12px 16px;
+      }
+      .modal-quote-text {
+        font-size: 16px;
+        font-style: italic;
+        color: #c0b090;
+        line-height: 1.5;
+      }
+      .modal-quote-ctx {
+        font-size: 11px;
+        color: var(--text4);
+        margin-top: 6px;
+        font-style: normal;
+      }
+      .close-btn {
+        background: transparent;
+        border: 1px solid var(--border2);
+        color: var(--text3);
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        border-radius: 2px;
+        font-size: 16px;
+        flex-shrink: 0;
+        align-self: flex-start;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .close-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+
+      /* ── TABS ── */
+      .tabs {
+        display: flex;
+        border-bottom: 1px solid var(--border);
+        padding: 0 32px;
+        background: var(--bg);
+        gap: 4px;
+      }
+      .tab-btn {
+        padding: 12px 18px;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid transparent;
+        color: var(--text3);
+        cursor: pointer;
+        font-family: "Cinzel", serif;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transition: all 0.2s;
+        margin-bottom: -1px;
+      }
+      .tab-btn:hover {
+        color: var(--text2);
+      }
+      .tab-btn.active {
+        color: var(--gold);
+        border-bottom-color: var(--gold);
+      }
+
+      /* ── TAB PANELS ── */
+      .panel {
+        display: none;
+        padding: 32px;
+      }
+      .panel.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .bio-text {
+        font-size: 17px;
+        line-height: 1.85;
+        color: var(--text2);
+      }
+
+      .idea-item {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 22px;
+        align-items: flex-start;
+      }
+      .idea-num {
+        width: 28px;
+        height: 28px;
+        border: 1px solid var(--mc);
+        border-radius: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Cinzel", serif;
+        font-size: 11px;
+        color: var(--mc);
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .idea-text {
+        font-size: 16px;
+        line-height: 1.65;
+        color: var(--text2);
+      }
+
+      .persp-intro {
+        font-size: 14px;
+        color: var(--text4);
+        font-style: italic;
+        margin-bottom: 24px;
+      }
+      .persp-card {
+        background: var(--bg4);
+        border-left: 3px solid var(--mc);
+        padding: 14px 18px;
+        margin-bottom: 14px;
+        border-radius: 0 3px 3px 0;
+        transition: background 0.2s;
+      }
+      .persp-card:hover {
+        background: #222018;
+      }
+      .persp-name {
+        font-family: "Cinzel", serif;
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: var(--mc);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .persp-view {
+        font-size: 16px;
+        line-height: 1.65;
+        color: #a09880;
+      }
+
+      .works-intro {
+        font-size: 14px;
+        color: var(--text4);
+        font-style: italic;
+        margin-bottom: 24px;
+      }
+      .works-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .work-tag {
+        padding: 6px 14px;
+        border: 1px solid var(--border2);
+        border-radius: 2px;
+        font-size: 14px;
+        color: var(--text3);
+        font-style: italic;
+        transition: all 0.2s;
+        cursor: default;
+      }
+      .work-tag:hover {
+        border-color: var(--text4);
+        color: var(--gold);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 44px 40px;
+        text-align: center;
+      }
+      footer p {
+        font-size: 14px;
+        color: var(--text4);
+        font-style: italic;
+      }
+
+      /* ── HIDDEN CARDS ── */
+      .card.hidden {
+        display: none;
+      }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeDown {
+        from {
+          opacity: 0;
+          transform: translateY(-14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes scaleX {
+        from {
+          transform: scaleX(0);
+        }
+        to {
+          transform: scaleX(1);
+        }
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 600px) {
+        .stats {
+          flex-wrap: wrap;
+        }
+        .stat {
+          max-width: 50%;
+          border-bottom: 1px solid var(--border);
+        }
+        .modal-header {
+          flex-wrap: wrap;
+        }
+        .modal-photo {
+          width: 70px;
+          height: 85px;
+        }
+        .tabs {
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <p class="header-eyebrow">Projeto Filosófico · Coleção Completa</p>
+      <h1>GRANDES FILÓSOFOS</h1>
+      <p class="header-sub">
+        Frases Emblemáticas · Biografias · Estudos · Perspectivas
+      </p>
+      <div class="header-line"></div>
+    </header>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Filósofos</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Eras</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Frases</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">18</div>
+        <div class="stat-label">Perspectivas</div>
+      </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterCards('todos', this)">
+        Todos
+      </button>
+      <button class="filter-btn" onclick="filterCards('Antiga', this)">
+        Antiga
+      </button>
+      <button class="filter-btn" onclick="filterCards('Moderna', this)">
+        Moderna
+      </button>
+      <button class="filter-btn" onclick="filterCards('Contemporânea', this)">
+        Contemporânea
+      </button>
+    </div>
+
+    <!-- GRID -->
+    <div class="grid" id="grid">
+      <!-- SÓCRATES -->
+      <div
+        class="card"
+        data-era="Antiga"
+        style="--c: #c8a97e; --ca: #8b6914"
+        onclick="openModal('socrates')"
+        style="animation-delay: 0s"
+      >
+        <div class="card-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Socrate_du_Louvre.jpg/400px-Socrate_du_Louvre.jpg"
+            alt="Sócrates"
+            loading="lazy"
+          />
+          <div class="card-img-fade"></div>
+          <span class="card-era-badge">Antiga</span>
+        </div>
+        <div class="card-body">
+          <p class="card-period">470–399 a.C. · Grécia</p>
+          <h2 class="card-name">Sócrates</h2>
+          <p class="card-school">Filosofia Socrática</p>
+          <div class="card-quote"><p>"Só sei que nada sei."</p></div>
+          <div class="card-footer">
+            <span class="card-count">3 perspectivas</span>
+            <span class="card-cta">Ver mais →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PLATÃO -->
+      <div
+        class="card"
+        data-era="Antiga"
+        style="--c: #7ba7bc; --ca: #2c5f7a"
+        onclick="openModal('platao')"
+        style="animation-delay: 0.1s"
+      >
+        <div class="card-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Plato_Silanion_Musei_Capitolini_MC1377.jpg/400px-Plato_Silanion_Musei_Capitolini_MC1377.jpg"
+            alt="Platão"
+            loading="lazy"
+          />
+          <div class="card-img-fade"></div>
+          <span class="card-era-badge">Antiga</span>
+        </div>
+        <div class="card-body">
+          <p class="card-period">428–348 a.C. · Grécia</p>
+          <h2 class="card-name">Platão</h2>
+          <p class="card-school">Platonismo</p>
+          <div class="card-quote">
+            <p>"A necessidade é a mãe da invenção."</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-count">3 perspectivas</span>
+            <span class="card-cta">Ver mais →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARISTÓTELES -->
+      <div
+        class="card"
+        data-era="Antiga"
+        style="--c: #a8c5a0; --ca: #3d7a43"
+        onclick="openModal('aristoteles')"
+        style="animation-delay: 0.2s"
+      >
+        <div class="card-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Aristotle_Altemps_Inv8575.jpg/400px-Aristotle_Altemps_Inv8575.jpg"
+            alt="Aristóteles"
+            loading="lazy"
+          />
+          <div class="card-img-fade"></div>
+          <span class="card-era-badge">Antiga</span>
+        </div>
+        <div class="card-body">
+          <p class="card-period">384–322 a.C. · Grécia</p>
+          <h2 class="card-name">Aristóteles</h2>
+          <p class="card-school">Aristotelismo / Peripatéticos</p>
+          <div class="card-quote">
+            <p>"O todo é maior que a soma das suas partes."</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-count">3 perspectivas</span>
+            <span class="card-cta">Ver mais →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESCARTES -->
+      <div
+        class="card"
+        data-era="Moderna"
+        style="--c: #b8c4d4; --ca: #2b4a7a"
+        onclick="openModal('descartes')"
+        style="animation-delay: 0.3s"
+      >
+        <div class="card-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/250px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg"
+            alt="Descartes"
+            loading="lazy"
+          />
+          <div class="card-img-fade"></div>
+          <span class="card-era-badge">Moderna</span>
+        </div>
+        <div class="card-body">
+          <p class="card-period">1596–1650 · França</p>
+          <h2 class="card-name">René Descartes</h2>
+          <p class="card-school">Racionalismo</p>
+          <div class="card-quote"><p>"Penso, logo existo."</p></div>
+          <div class="card-footer">
+            <span class="card-count">3 perspectivas</span>
+            <span class="card-cta">Ver mais →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KANT -->
+      <div
+        class="card"
+        data-era="Moderna"
+        style="--c: #d4b8c7; --ca: #7a3b5c"
+        onclick="openModal('kant')"
+        style="animation-delay: 0.4s"
+      >
+        <div class="card-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Immanuel_Kant_-_Gemaelde_2.jpg/250px-Immanuel_Kant_-_Gemaelde_2.jpg"
+            alt="Kant"
+            loading="lazy"
+          />
+          <div class="card-img-fade"></div>
+          <span class="card-era-badge">Moderna</span>
+        </div>
+        <div class="card-body">
+          <p class="card-period">1724–1804 · Prússia</p>
+          <h2 class="card-name">Immanuel Kant</h2>
+          <p class="card-school">Idealismo Transcendental</p>
+          <div class="card-quote">
+            <p>
+              "Age apenas segundo a máxima pela qual possas querer que ela se
+              torne lei universal."
+            </p>
+          </div>
+          <div class="card-footer">
+            <span class="card-count">3 perspectivas</span>
+            <span class="card-cta">Ver mais →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- NIETZSCHE -->
+      <div
+        class="card"
+        data-era="Contemporânea"
+        style="--c: #c4a882; --ca: #7a3b00"
+        onclick="openModal('nietzsche')"
+        style="animation-delay: 0.5s"
+      >
+        <div class="card-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Nietzsche187a.jpg/250px-Nietzsche187a.jpg"
+            alt="Nietzsche"
+            loading="lazy"
+          />
+          <div class="card-img-fade"></div>
+          <span class="card-era-badge">Contemporânea</span>
+        </div>
+        <div class="card-body">
+          <p class="card-period">1844–1900 · Alemanha</p>
+          <h2 class="card-name">Friedrich Nietzsche</h2>
+          <p class="card-school">Filosofia da Vida / Vitalismo</p>
+          <div class="card-quote">
+            <p>"Deus está morto. E fomos nós que o matamos."</p>
+          </div>
+          <div class="card-footer">
+            <span class="card-count">3 perspectivas</span>
+            <span class="card-cta">Ver mais →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /grid -->
+
+    <!-- FOOTER -->
+    <footer>
+      <p>"A filosofia começa com o espanto." — Aristóteles</p>
+    </footer>
+
+    <!-- ═══════════════════ MODAL ═══════════════════ -->
+    <div class="overlay" id="overlay" onclick="closeModalOutside(event)">
+      <div class="modal" id="modal">
+        <div class="modal-header" id="modal-header">
+          <img src="" alt="" class="modal-photo" id="modal-photo" />
+          <div class="modal-meta">
+            <p class="modal-period" id="modal-period"></p>
+            <h2 class="modal-name" id="modal-name"></h2>
+            <p class="modal-school" id="modal-school"></p>
+            <div class="modal-quote-box">
+              <p class="modal-quote-text" id="modal-quote"></p>
+              <p class="modal-quote-ctx" id="modal-quote-ctx"></p>
+            </div>
+          </div>
+          <button class="close-btn" onclick="closeModal()">✕</button>
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab('bio', this)">
+            Biografia
+          </button>
+          <button class="tab-btn" onclick="switchTab('ideas', this)">
+            Ideias
+          </button>
+          <button class="tab-btn" onclick="switchTab('persp', this)">
+            Perspectivas
+          </button>
+          <button class="tab-btn" onclick="switchTab('works', this)">
+            Obras
+          </button>
+        </div>
+
+        <div class="panel active" id="panel-bio">
+          <p class="bio-text" id="modal-bio"></p>
+        </div>
+        <div class="panel" id="panel-ideas">
+          <div id="modal-ideas"></div>
+        </div>
+        <div class="panel" id="panel-persp">
+          <p class="persp-intro" id="persp-intro"></p>
+          <div id="modal-persp"></div>
+        </div>
+        <div class="panel" id="panel-works">
+          <p class="works-intro" id="works-intro"></p>
+          <div class="works-list" id="modal-works"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const DATA = {
+        socrates: {
+          color: "#C8A97E",
+          period: "470–399 a.C. · Grécia",
+          name: "Sócrates",
+          school: "Filosofia Socrática",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Socrate_du_Louvre.jpg/400px-Socrate_du_Louvre.jpg",
+          quote: '"Só sei que nada sei."',
+          quoteCtx:
+            "Reflexão sobre a humildade intelectual e os limites do conhecimento humano.",
+          bio: "Filósofo ateniense considerado o pai da filosofia ocidental. Não deixou escritos; seu pensamento chegou até nós pelos diálogos de Platão. Foi condenado à morte por corrupção da juventude e impiedade religiosa, tornando-se o mártir da filosofia. Seu método — a maiêutica — consistia em questionar interlocutores até revelar contradições em suas crenças, levando-os a um autoconhecimento mais profundo.",
+          ideas: [
+            'Método socrático (maiêutica): arte de "parir" ideias por meio do diálogo e questionamento',
+            'Autoconhecimento: "Conhece-te a ti mesmo" como imperativo filosófico fundamental',
+            "A virtude é conhecimento — o mal nasce sempre da ignorância, nunca da má vontade deliberada",
+            "A alma é imortal e superior ao corpo; a filosofia é uma preparação para a morte",
+          ],
+          perspectives: [
+            {
+              name: "Platão",
+              view: "Sócrates era o filósofo ideal — buscador incansável da verdade absoluta e da Forma do Bem.",
+            },
+            {
+              name: "Nietzsche",
+              view: "Criticou Sócrates por destruir a cultura trágica grega com o racionalismo excessivo e a dialética.",
+            },
+            {
+              name: "Hegel",
+              view: "Sócrates representou o momento de ruptura entre a moralidade coletiva e a consciência individual autônoma.",
+            },
+          ],
+          works: [
+            "Apologia (por Platão)",
+            "Críton",
+            "Fédon",
+            "O Banquete",
+            "A República (narrada)",
+          ],
+        },
+        platao: {
+          color: "#7BA7BC",
+          period: "428–348 a.C. · Grécia",
+          name: "Platão",
+          school: "Platonismo",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Plato_Silanion_Musei_Capitolini_MC1377.jpg/400px-Plato_Silanion_Musei_Capitolini_MC1377.jpg",
+          quote: '"A necessidade é a mãe da invenção."',
+          quoteCtx:
+            "Da República — sobre como as sociedades desenvolvem habilidades por necessidade coletiva.",
+          bio: "Discípulo de Sócrates e mestre de Aristóteles. Fundou a Academia em Atenas, considerada a primeira universidade ocidental. Desenvolveu a Teoria das Formas e uma visão dualista da realidade entre o mundo sensível e o mundo das ideias eternas e perfeitas. Seus diálogos combinam filosofia, drama e mito de forma literária incomparável.",
+          ideas: [
+            "Teoria das Formas: o mundo real é imutável e perfeito, acessível apenas pela razão pura",
+            "Alegoria da Caverna: a maioria vive em ilusão, confundindo sombras projetadas com a realidade",
+            "A alma possui três partes: racional, irascível e apetitiva — cada uma com sua virtude",
+            "O Estado ideal é governado por filósofos-reis, guiados pelo conhecimento do Bem",
+          ],
+          perspectives: [
+            {
+              name: "Aristóteles",
+              view: "Criticou a Teoria das Formas por duplicar desnecessariamente a realidade sem explicar a relação entre os dois mundos.",
+            },
+            {
+              name: "Heidegger",
+              view: 'A metafísica platônica inaugurou o "esquecimento do ser" que dominou toda a tradição ocidental.',
+            },
+            {
+              name: "Whitehead",
+              view: "Toda a filosofia ocidental pode ser descrita como uma série de notas de rodapé aos diálogos de Platão.",
+            },
+          ],
+          works: [
+            "A República",
+            "O Banquete",
+            "Fédon",
+            "Timeu",
+            "Mênon",
+            "A Apologia de Sócrates",
+          ],
+        },
+        aristoteles: {
+          color: "#A8C5A0",
+          period: "384–322 a.C. · Grécia",
+          name: "Aristóteles",
+          school: "Aristotelismo / Peripatéticos",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Aristotle_Altemps_Inv8575.jpg/400px-Aristotle_Altemps_Inv8575.jpg",
+          quote: '"O todo é maior que a soma das suas partes."',
+          quoteCtx:
+            "Da Metafísica — sobre a natureza do ser, da forma e da substância composta.",
+          bio: 'O "Filósofo" por excelência na tradição medieval. Discípulo de Platão e tutor de Alexandre, o Grande. Criou sistemas completos de lógica formal, biologia, ética, política, retórica e poética que dominaram o pensamento ocidental por mais de mil e quinhentos anos. Seu método era empírico e classificatório — observar o mundo antes de teorizar.',
+          ideas: [
+            "Lógica formal: criou o silogismo e as categorias do pensamento racional",
+            "A forma está na própria matéria — não há um mundo separado de ideias platônicas",
+            "Ética das virtudes: a felicidade (eudaimonia) como fim último da vida humana",
+            'A política é natural: o homem é por natureza um "animal político" (zōon politikon)',
+          ],
+          perspectives: [
+            {
+              name: "São Tomás de Aquino",
+              view: "Harmonizou Aristóteles com o Cristianismo, tornando-o o pilar intelectual da Escolástica medieval.",
+            },
+            {
+              name: "Darwin",
+              view: "Reconheceu em Aristóteles o primeiro grande biólogo e taxonomista sistemático da natureza.",
+            },
+            {
+              name: "Marx",
+              view: "Admirou sua análise econômica pioneira, mas criticou sua justificação racional da escravidão.",
+            },
+          ],
+          works: [
+            "Ética a Nicômaco",
+            "Política",
+            "Metafísica",
+            "Poética",
+            "Órganon",
+            "De Anima",
+          ],
+        },
+        descartes: {
+          color: "#B8C4D4",
+          period: "1596–1650 · França",
+          name: "René Descartes",
+          school: "Racionalismo",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/400px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg",
+          quote: '"Penso, logo existo."',
+          quoteCtx:
+            "Do Discurso do Método — o ponto arquimediano da certeza inabalável.",
+          bio: "Pai da filosofia moderna e criador da geometria analítica. Propôs a dúvida metódica como caminho para o conhecimento absolutamente certo — duvidar de tudo até encontrar uma certeza que resistisse a qualquer questionamento. O dualismo mente-corpo (res cogitans / res extensa) que formulou ainda hoje define os debates centrais na filosofia da mente e nas neurociências.",
+          ideas: [
+            "Dúvida metódica: questionar radicalmente tudo até encontrar certezas inabaláveis",
+            "Cogito ergo sum: a existência do pensamento como única certeza primária e indiscutível",
+            "Dualismo cartesiano: mente (res cogitans) e corpo (res extensa) são substâncias completamente distintas",
+            "O método matemático como modelo para toda ciência e filosofia rigorosas",
+          ],
+          perspectives: [
+            {
+              name: "Spinoza",
+              view: "Rejeitou o dualismo cartesiano: mente e corpo são apenas atributos de uma única substância infinita — Deus ou a Natureza.",
+            },
+            {
+              name: "Gilbert Ryle",
+              view: 'O dualismo de Descartes é um erro categorial clássico — a ilusão do "fantasma na máquina".',
+            },
+            {
+              name: "Husserl",
+              view: "Descartes foi o precursor da fenomenologia ao colocar a consciência e a subjetividade no centro da filosofia.",
+            },
+          ],
+          works: [
+            "Discurso do Método",
+            "Meditações Metafísicas",
+            "Princípios da Filosofia",
+            "As Paixões da Alma",
+          ],
+        },
+        kant: {
+          color: "#D4B8C7",
+          period: "1724–1804 · Prússia",
+          name: "Immanuel Kant",
+          school: "Idealismo Transcendental",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Immanuel_Kant_%28painted_portrait%29.jpg/400px-Immanuel_Kant_%28painted_portrait%29.jpg",
+          quote:
+            '"Age apenas segundo a máxima pela qual possas querer que ela se torne lei universal."',
+          quoteCtx:
+            "O Imperativo Categórico — fundamento absoluto da ética kantiana.",
+          bio: 'Considerado o maior filósofo da era moderna. Realizou uma "revolução copernicana" na filosofia ao afirmar que não é o sujeito que gira em torno do objeto, mas o objeto que se conforma às estruturas do sujeito. Nunca saiu de Königsberg, mas sua obra transformou radicalmente o pensamento filosófico, científico e moral do mundo inteiro.',
+          ideas: [
+            "Crítica da razão pura: mapeamento rigoroso dos limites e capacidades do conhecimento humano",
+            'Fenômeno vs. noumeno: conhecemos apenas as aparências; a "coisa em si" permanece inacessível',
+            "Imperativo categórico: a lei moral universal fundada exclusivamente na razão autônoma",
+            "O Iluminismo como a saída da humanidade de sua menoridade intelectual autoimposta",
+          ],
+          perspectives: [
+            {
+              name: "Hegel",
+              view: "Kant criticou corretamente a razão, mas permaneceu preso no dualismo que tentou superar — a síntese estava ainda por vir.",
+            },
+            {
+              name: "Schopenhauer",
+              view: 'A "coisa em si" kantiana é a Vontade — força cega, irracional e insaciável que move toda a existência.',
+            },
+            {
+              name: "Foucault",
+              view: 'A questão kantiana "O que é o Iluminismo?" inaugura a tradição da filosofia crítica e do diagnóstico do presente.',
+            },
+          ],
+          works: [
+            "Crítica da Razão Pura",
+            "Crítica da Razão Prática",
+            "Crítica do Juízo",
+            "Fundamentação da Metafísica dos Costumes",
+          ],
+        },
+        nietzsche: {
+          color: "#C4A882",
+          period: "1844–1900 · Alemanha",
+          name: "Friedrich Nietzsche",
+          school: "Filosofia da Vida / Vitalismo",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Nietzsche187a.jpg/400px-Nietzsche187a.jpg",
+          quote: '"Deus está morto. E fomos nós que o matamos."',
+          quoteCtx:
+            "Da Gaia Ciência — sobre o colapso dos valores absolutos na modernidade secular.",
+          bio: "Filósofo radical que questionou toda a tradição moral, metafísica e religiosa ocidental. Proclamou a morte de Deus, diagnosticou o niilismo moderno e anunciou o advento do Super-Homem criador de novos valores. Suas obras — escritas em aforismos, poesia e prosa visionária — influenciaram profundamente a literatura, a psicanálise, a arte e o pensamento político do século XX.",
+          ideas: [
+            "A morte de Deus e a consequente crise de todos os valores absolutos do Ocidente",
+            "Super-Homem (Übermensch): quem tem coragem de criar seus próprios valores além do bem e do mal",
+            "Vontade de poder (Wille zur Macht): a força fundamental que move toda vida e criação",
+            "Eterno retorno e amor fati: amar o destino e querer repetir a própria vida infinitamente",
+          ],
+          perspectives: [
+            {
+              name: "Heidegger",
+              view: "Nietzsche consumou e completou a metafísica ocidental ao inverter o platonismo — mas não o superou.",
+            },
+            {
+              name: "Deleuze",
+              view: "Leu Nietzsche como o grande filósofo da diferença, da multiplicidade e da afirmação radical da vida.",
+            },
+            {
+              name: "Freud",
+              view: "Reconheceu que Nietzsche foi quem mais se aproximou intuitivamente do inconsciente antes da psicanálise.",
+            },
+          ],
+          works: [
+            "Assim Falou Zaratustra",
+            "Além do Bem e do Mal",
+            "A Gaia Ciência",
+            "O Nascimento da Tragédia",
+            "Genealogia da Moral",
+          ],
+        },
+      };
+
+      let currentPhil = null;
+
+      function openModal(id) {
+        const d = DATA[id];
+        currentPhil = id;
+
+        // Set color variable
+        document.getElementById("modal").style.setProperty("--mc", d.color);
+
+        // Fill header
+        const photo = document.getElementById("modal-photo");
+        photo.src = d.photo;
+        photo.alt = d.name;
+        document.getElementById("modal-period").textContent = d.period;
+        document.getElementById("modal-name").textContent = d.name;
+        document.getElementById("modal-school").textContent = d.school;
+        document.getElementById("modal-quote").textContent = d.quote;
+        document.getElementById("modal-quote-ctx").textContent = d.quoteCtx;
+
+        // Biography
+        document.getElementById("modal-bio").textContent = d.bio;
+
+        // Ideas
+        let ideasHtml = "";
+        d.ideas.forEach((idea, i) => {
+          ideasHtml += `<div class="idea-item">
+      <div class="idea-num">${i + 1}</div>
+      <p class="idea-text">${idea}</p>
+    </div>`;
+        });
+        document.getElementById("modal-ideas").innerHTML = ideasHtml;
+
+        // Perspectives
+        document.getElementById("persp-intro").textContent =
+          `Como outros filósofos interpretaram e criticaram ${d.name}:`;
+        let perspHtml = "";
+        d.perspectives.forEach((p) => {
+          perspHtml += `<div class="persp-card">
+      <p class="persp-name">${p.name}</p>
+      <p class="persp-view">${p.view}</p>
+    </div>`;
+        });
+        document.getElementById("modal-persp").innerHTML = perspHtml;
+
+        // Works
+        document.getElementById("works-intro").textContent =
+          `Principais obras de ${d.name}:`;
+        let worksHtml = "";
+        d.works.forEach((w) => {
+          worksHtml += `<span class="work-tag">${w}</span>`;
+        });
+        document.getElementById("modal-works").innerHTML = worksHtml;
+
+        // Reset to first tab
+        switchTab("bio", document.querySelector(".tab-btn"));
+
+        // Open overlay
+        document.getElementById("overlay").classList.add("open");
+        document.body.style.overflow = "hidden";
+        document.getElementById("modal").scrollTop = 0;
+      }
+
+      function closeModal() {
+        document.getElementById("overlay").classList.remove("open");
+        document.body.style.overflow = "";
+        currentPhil = null;
+      }
+
+      function closeModalOutside(e) {
+        if (e.target === document.getElementById("overlay")) closeModal();
+      }
+
+      function switchTab(tab, btn) {
+        // Hide all panels
+        document
+          .querySelectorAll(".panel")
+          .forEach((p) => p.classList.remove("active"));
+        // Deactivate all tab buttons
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        // Activate selected
+        document.getElementById("panel-" + tab).classList.add("active");
+        btn.classList.add("active");
+      }
+
+      function filterCards(era, btn) {
+        // Update buttons
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        // Show/hide cards
+        document.querySelectorAll(".card").forEach((card) => {
+          if (era === "todos" || card.dataset.era === era) {
+            card.classList.remove("hidden");
+          } else {
+            card.classList.add("hidden");
+          }
+        });
+      }
+
+      // Keyboard close
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
+    </script>
+  </body>
+</html>
