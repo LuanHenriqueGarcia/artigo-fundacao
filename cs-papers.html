@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artigos para CS que Brigam na Rua</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #1a1a1a;
+    --red: #e63329;
+    --red-dim: #8b1e1a;
+    --white: #f0ece3;
+    --gray: #555;
+    --gray-light: #888;
+    --border: #222;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'IBM Plex Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    min-height: 56px;
+  }
+  .header-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1rem, 2.5vw, 1.4rem); letter-spacing: 0.08em; color: var(--red); }
+  .header-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .header-count { font-size: 0.7rem; color: var(--gray-light); letter-spacing: 0.1em; }
+  .search-wrap { position: relative; }
+  .search-input { background: var(--bg2); border: 1px solid var(--border); color: var(--white); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; padding: 0.4rem 0.75rem 0.4rem 2rem; width: 200px; outline: none; transition: border-color 0.15s, width 0.2s; }
+  .search-input:focus { border-color: var(--red-dim); width: 280px; }
+  .search-input::placeholder { color: var(--gray); }
+  .search-icon { position: absolute; left: 0.6rem; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 0.75rem; pointer-events: none; }
+  .hero { padding: clamp(3rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+  .hero::after { content: 'CS'; font-family: 'Bebas Neue', sans-serif; font-size: 30vw; color: rgba(230,51,41,0.04); position: absolute; right: -2vw; top: 50%; transform: translateY(-50%); pointer-events: none; line-height: 1; }
+  .hero-label { font-size: 0.65rem; letter-spacing: 0.25em; color: var(--red); text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-label::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--red); }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 8vw, 8rem); line-height: 0.92; letter-spacing: 0.02em; max-width: 18ch; margin-bottom: 2.5rem; }
+  h1 span { color: var(--red); }
+  .hero-text { font-size: clamp(0.8rem, 1.5vw, 0.95rem); line-height: 1.8; max-width: 70ch; color: #aaa; font-style: italic; }
+  .hero-text p + p { margin-top: 1rem; }
+  .filters { padding: 1.25rem clamp(1.5rem, 5vw, 4rem); display: flex; gap: 0.5rem; flex-wrap: wrap; border-bottom: 1px solid var(--border); background: var(--bg2); }
+  .filter-btn { background: transparent; border: 1px solid var(--border); color: var(--gray-light); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 0.9rem; cursor: pointer; transition: all 0.15s; }
+  .filter-btn:hover { border-color: var(--red-dim); color: var(--white); }
+  .filter-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
+  main { padding: clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 5vw, 4rem); max-width: 1400px; }
+  .category-section { margin-bottom: 4rem; }
+  .category-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+  .category-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 4vw, 2.8rem); letter-spacing: 0.04em; line-height: 1; }
+  .category-subtitle { font-size: 0.7rem; color: var(--gray); font-style: italic; letter-spacing: 0.08em; }
+  .category-desc { font-size: 0.75rem; color: var(--gray-light); line-height: 1.7; font-style: italic; margin-bottom: 1.5rem; max-width: 80ch; }
+  .papers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .paper-card { background: var(--bg); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; transition: background 0.15s; position: relative; overflow: hidden; }
+  .paper-card:hover { background: var(--bg3); }
+  .paper-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--red); transform: scaleY(0); transition: transform 0.2s; transform-origin: bottom; }
+  .paper-card:hover::before { transform: scaleY(1); }
+  .paper-meta { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .paper-year { font-size: 0.65rem; color: var(--red); letter-spacing: 0.15em; font-weight: 600; }
+  .paper-tag { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); border: 1px solid var(--border); padding: 0.2rem 0.5rem; }
+  .paper-title-pt { font-family: 'Space Mono', monospace; font-size: clamp(0.9rem, 1.8vw, 1.05rem); font-weight: 700; line-height: 1.35; color: var(--white); }
+  .paper-title-original { font-size: 0.7rem; color: var(--gray-light); font-style: italic; line-height: 1.4; }
+  .paper-authors { font-size: 0.7rem; color: var(--gray-light); letter-spacing: 0.04em; }
+  .paper-desc { font-size: 0.75rem; line-height: 1.75; color: #9a9a9a; flex: 1; }
+  .paper-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); text-decoration: none; margin-top: 0.25rem; width: fit-content; border-bottom: 1px solid transparent; transition: border-color 0.15s, color 0.15s; }
+  .paper-link:hover { color: var(--white); border-bottom-color: var(--white); }
+  .empty { padding: 4rem 0; color: var(--gray); font-size: 0.8rem; font-style: italic; }
+  footer { border-top: 1px solid var(--border); padding: 2rem clamp(1.5rem, 5vw, 4rem); color: var(--gray); font-size: 0.65rem; letter-spacing: 0.1em; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  @media (max-width: 600px) { .search-input, .search-input:focus { width: 100%; } header { padding: 0.75rem 1rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="header-title">Artigos para CS que Brigam na Rua</span>
+  <div class="header-right">
+    <span class="header-count" id="count-display">28 artigos · 5 categorias</span>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input class="search-input" type="text" placeholder="Buscar artigo..." id="search-input" />
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-label">Leitura Obrigatória</div>
+  <h1>Artigos para <span>Cientistas</span> que Brigam na Rua</h1>
+  <div class="hero-text">
+    <p>Tem gente que acha que a era do Vibe Code diminuiu a importância dos fundamentos. O contrário.</p>
+    <p>Quando gerar código vira commodity, o gargalo é abstração, modelo mental, arquitetura, representação, semântica. O profissional que continua relevante é o que sabe enquadrar o problema e reconhecer quais ideias continuam mandando no jogo por baixo de todo o barulho.</p>
+    <p>Imprima. Sublinhe. Anote nas margens. Pesquise os termos que não entende. Releia o parágrafo que não fez sentido três vezes. Discuta com colegas. Leia outras publicações do autor. Entenda o que existia antes e o que mudou depois.</p>
+  </div>
+</section>
+
+<div class="filters" id="filters">
+  <button class="filter-btn active" data-filter="all">Todos</button>
+  <button class="filter-btn" data-filter="combate">Combate Corpo-a-Corpo</button>
+  <button class="filter-btn" data-filter="soco">Soco Inglês</button>
+  <button class="filter-btn" data-filter="canivete">Canivete</button>
+  <button class="filter-btn" data-filter="ruas">Nas Ruas</button>
+  <button class="filter-btn" data-filter="escuro">No Escuro</button>
+</div>
+
+<main id="main-content"></main>
+
+<footer>
+  <span>Textos que mudaram o que a ciência da computação pode computar sobre si mesma.</span>
+  <span id="footer-count">28 artigos listados</span>
+</footer>
+
+<script>
+var D = [
+  { cat:"combate", name:"Combate Corpo-a-Corpo", desc:"A porradaria pré-silício. Os textos que construíram o chão onde a luta acontece. Quem não leu ainda não está brigando — está apanhando sem nem saber de onde.", papers:[
+    { y:1703, pt:"Explicação da Aritmética Binária", orig:"Explication de l'Arithmétique Binaire", auth:"Leibniz", tag:"Fundamentos", desc:"Enquanto nossos ancestrais jogavam fezes pela janela, Leibniz estava inventando o sistema numérico binário. Este é o núcleo e os átomos da máquina.", url:"https://www.leibniz-translations.com/binary.htm" },
+    { y:1936, pt:"Sobre Números Computáveis, com uma Aplicação ao Entscheidungsproblem", orig:"On Computable Numbers, with an Application to the Entscheidungsproblem", auth:"Alan Turing", tag:"Computabilidade", desc:"O problema da parada. O artigo que inventou o computador de propósito geral por acidente. Se você nunca leu Turing, sua ideia de 'o que é computar' ainda é terceirizada.", url:"https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf" },
+    { y:1936, pt:"Um Problema Insolúvel da Teoria Elementar dos Números", orig:"An Unsolvable Problem of Elementary Number Theory", auth:"Alonzo Church", tag:"Cálculo Lambda", desc:"O cálculo lambda. Publicado no mesmo ano que a máquina de Turing. Eles independentemente provaram a mesma coisa de direções opostas.", url:"https://www.jstor.org/stable/2371045" },
+    { y:1948, pt:"Uma Teoria Matemática da Comunicação", orig:"A Mathematical Theory of Communication", auth:"Claude Shannon", tag:"Teoria da Informação", desc:"O big bang da teoria da informação. A palavra 'bit' foi inventada neste artigo. Se você está movendo dados por um cabo e não entende entropia, você ainda não aprendeu nada.", url:"https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf" },
+    { y:1956, pt:"Três Modelos para a Descrição da Linguagem", orig:"Three Models for the Description of Language", auth:"Noam Chomsky", tag:"Linguagens Formais", desc:"Quando um linguista propôs modelos formais para descrever as línguas humanas e, sem saber, criou o vocabulário sobre o qual todas as linguagens de programação foram construídas.", url:"https://chomsky.info/wp-content/uploads/195609-.pdf" }
+  ]},
+  { cat:"soco", name:"Usando o Soco Inglês", desc:"", papers:[
+    { y:1959, pt:"Uma Nota Sobre Dois Problemas em Conexão com Grafos", orig:"A Note on Two Problems in Connexion with Graphs", auth:"Edsger Dijkstra", tag:"Algoritmos", desc:"Caminho mínimo. Três páginas. Redes, roteamento, mapas, planejamento, otimização. Tudo isso nasceu de três páginas.", url:"https://www.cs.yale.edu/homes/lans/readings/routing/dijkstra-routing-1959.pdf" },
+    { y:1962, pt:"Quicksort", orig:"Quicksort", auth:"C.A.R. Hoare", tag:"Algoritmos", desc:"O algoritmo de ordenação padrão pelas próximas seis décadas. Todo binário carrega alguma implementação desse truque. Melhor entender do que fingir que é milagre divino.", url:"https://academic.oup.com/comjnl/article/5/1/10/395338" },
+    { y:1970, pt:"Um Modelo Relacional de Dados para Grandes Bancos de Dados Compartilhados", orig:"A Relational Model of Data for Large Shared Data Banks", auth:"Edgar F. Codd", tag:"Banco de Dados", desc:"Nossos bancos de dados favoritos são apenas teoria dos conjuntos implementada em C. Aceite e estude.", url:"https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf" },
+    { y:1972, pt:"Organização e Manutenção de Grandes Índices Ordenados", orig:"Organization and Maintenance of Large Ordered Indexes", auth:"Bayer e McCreight", tag:"Estruturas de Dados", desc:"A árvore B. Toda implementação de bancos de dados e sistemas de arquivos usa alguma variação dessa ideia.", url:"https://infolab.usc.edu/csci585/Spring2010/den_ar/indexing.pdf" },
+    { y:1974, pt:"Um Protocolo para Comunicação em Redes de Pacotes", orig:"A Protocol for Packet Network Intercommunication", auth:"Cerf e Kahn", tag:"Redes", desc:"TCP. A internet. Se você acha que a nuvem é mágica, leia isso e entenda que ela é feita de pacotes implorando para não serem dropados.", url:"https://www.cs.princeton.edu/courses/archive/fall06/cos561/papers/cerf74.pdf" },
+    { y:1978, pt:"Um Método para Obter Assinaturas Digitais e Criptossistemas de Chave Pública", orig:"A Method for Obtaining Digital Signatures and Public-Key Cryptosystems", auth:"Rivest, Shamir e Adleman", tag:"Criptografia", desc:"RSA. O paper que tornou possível o e-commerce e a comunicação segura na internet.", url:"https://people.csail.mit.edu/rivest/Rsapaper.pdf" }
+  ]},
+  { cat:"canivete", name:"Afiando o Canivete", desc:"", papers:[
+    { y:1970, pt:"Gerenciando o Desenvolvimento de Grandes Sistemas de Software", orig:"Managing the Development of Large Software Systems", auth:"Winston W. Royce", tag:"Eng. de Software", desc:"O paper eternamente citado por gente que nunca o leu. Ficou conhecido por criar o waterfall, mas o próprio texto já alerta que o fluxo sequencial puro é catastrófico.", url:"http://www-scf.usc.edu/~csci201/lectures/Lecture11/royce1970.pdf" },
+    { y:1972, pt:"Sobre os Critérios a Usar na Decomposição de Sistemas em Módulos", orig:"On the Criteria To Be Used in Decomposing Systems into Modules", auth:"David Parnas", tag:"Arquitetura", desc:"Modularidade aqui deixa de ser estética e vira critério de sobrevivência. Não é só quebrar o sistema em partes — é decidir como quebrar.", url:"https://www.cs.umd.edu/class/spring2003/cmsc838p/Design/criteria.pdf" },
+    { y:1974, pt:"O Sistema de Tempo Compartilhado UNIX", orig:"The UNIX Time-Sharing System", auth:"Thompson e Ritchie", tag:"Sistemas Operacionais", desc:"A fundação da nossa religião. A filosofia de fazer uma coisa só e fazer bem feito. O sistema que sobreviveu a todas as modas corporativas e hoje roda desde o roteador da sua casa a todos os servidores do planeta.", url:"https://people.eecs.berkeley.edu/~brewer/cs262/unix.pdf" },
+    { y:1978, pt:"Tempo, Relógios e a Ordenação de Eventos em um Sistema Distribuído", orig:"Time, Clocks, and the Ordering of Events in a Distributed System", auth:"Leslie Lamport", tag:"Sistemas Distribuídos", desc:"Campeão peso-pesado. O tempo absoluto é uma ilusão. Se você constrói microsserviços sem ler isso, você está construindo bugs distribuídos.", url:"https://lamport.azurewebsites.net/pubs/time-clocks.pdf" },
+    { y:1978, pt:"A Programação Pode Ser Libertada do Estilo von Neumann?", orig:"Can Programming Be Liberated from the von Neumann Style?", auth:"John Backus", tag:"Prog. Funcional", desc:"O cara que inventou o FORTRAN usou seu discurso do Prêmio Turing para dizer ao mundo que a programação imperativa era um beco sem saída. A semente da programação funcional moderna.", url:"https://www.thocp.net/biographies/papers/backus_turingaward_lecture.pdf" },
+    { y:1984, pt:"Reflexões Sobre Como Confiar em Confiança", orig:"Reflections on Trusting Trust", auth:"Ken Thompson", tag:"Segurança", desc:"Como inserir um backdoor no compilador que se auto-replica. Em três páginas destrói a noção de que você pode confiar em software. O paper de segurança mais aterrorizante já escrito.", url:"https://www.cs.cmu.edu/~rdriley/487/papers/Thompson_1984_ReflectionsonTrustingTrust.pdf" },
+    { y:1986, pt:"Não Existe Bala de Prata", orig:"No Silver Bullet", auth:"Frederick P. Brooks", tag:"Eng. de Software", desc:"O sermão permanente contra todo hype. Não existe ferramenta, metodologia ou mascote capaz de remover a dificuldade inerente de fazer software. Cada nova geração precisa reaprender do zero.", url:"http://worrydream.com/refs/Brooks-NoSilverBullet.pdf" },
+    { y:1987, pt:"Uma Assinatura Digital Baseada em uma Função de Criptografia Convencional", orig:"A Digital Signature Based on a Conventional Encryption Function", auth:"Ralph Merkle", tag:"Criptografia", desc:"A árvore de Merkle. Git, torrents, bitcoin. Toda infraestrutura que se recusa a ser corrompida usa essa ideia.", url:"https://link.springer.com/chapter/10.1007/3-540-48184-2_32" }
+  ]},
+  { cat:"ruas", name:"Brigando nas Ruas", desc:"", papers:[
+    { y:1996, pt:"Estourando a Pilha por Diversão e Lucro", orig:"Smashing the Stack for Fun and Profit", auth:"Aleph One", tag:"Segurança", desc:"O texto que ensinou uma geração inteira a explorar stack buffer overflows. Boa parte da cultura de segurança ofensiva e defensiva passa por aqui.", url:"https://phrack.org/issues/49/14.html" },
+    { y:1998, pt:"A Anatomia de um Motor de Busca Web em Grande Escala", orig:"The Anatomy of a Large-Scale Hypertextual Web Search Engine", auth:"Brin e Page", tag:"Sistemas", desc:"O paper original do Google. Dois doutorandos mostram como indexar a Internet inteira.", url:"http://infolab.stanford.edu/~backrub/google.html" },
+    { y:2004, pt:"LLVM: Um Framework de Compilação para Análise de Programas", orig:"LLVM: A Compilation Framework for Lifelong Program Analysis & Transformation", auth:"Lattner e Adve", tag:"Compiladores", desc:"Um projeto de mestrado que acidentalmente reescreveu toda a indústria de compiladores do planeta.", url:"https://llvm.org/pubs/2004-01-30-CGO-LLVM.pdf" },
+    { y:2006, pt:"Bigtable: Um Sistema de Armazenamento Distribuído para Dados Estruturados", orig:"Bigtable: A Distributed Storage System for Structured Data", auth:"Chang et al.", tag:"Banco de Dados", desc:"O paper que inventou o NoSQL antes disso ser uma palavra. Mil imitadores descendem disso.", url:"https://static.googleusercontent.com/media/research.google.com/en//archive/bigtable-osdi06.pdf" },
+    { y:2008, pt:"Bitcoin: Um Sistema de Pagamento Eletrônico Peer-to-Peer", orig:"Bitcoin: A Peer-to-Peer Electronic Cash System", auth:"Satoshi Nakamoto", tag:"Criptografia", desc:"Ninguém sabe quem escreveu. O único sistema bancário do planeta que funciona há mais de 15 anos sem nenhum downtime.", url:"https://bitcoin.org/bitcoin.pdf" }
+  ]},
+  { cat:"escuro", name:"Pancadaria no Escuro", desc:"A máquina aprendeu a ver, a ler, a escrever. Mas se você usa AI sem ter entendido os próximos conceitos, você está pilotando um avião sem saber o que é sustentação.", papers:[
+    { y:1950, pt:"Maquinaria de Computação e Inteligência", orig:"Computing Machinery and Intelligence", auth:"Alan Turing", tag:"IA", desc:"O cara que inventou a computação volta para fazer a pergunta que lançou a inteligência artificial. Todo mundo fala do teste de Turing, quase ninguém leu o paper original. Ele já antecipa e destrói metade dos argumentos contra AI que as pessoas repetem até hoje.", url:"https://academic.oup.com/mind/article/LIX/236/433/986238" },
+    { y:1986, pt:"Aprendendo Representações por Retropropagação de Erros", orig:"Learning Representations by Back-Propagating Errors", auth:"Rumelhart, Hinton e Williams", tag:"Deep Learning", desc:"Backpropagation. A regra da cadeia aplicada com violência industrial. Sem backprop não existe deep learning, não existe GPT, não existe essa conversa.", url:"https://www.nature.com/articles/323533a0" },
+    { y:1998, pt:"Aprendizado Baseado em Gradiente Aplicado ao Reconhecimento de Documentos", orig:"Gradient-Based Learning Applied to Document Recognition", auth:"LeCun et al.", tag:"Redes Neurais", desc:"Uma rede neural com performance melhor que humanos e o mundo parece ainda não perceber a implicação.", url:"http://vision.stanford.edu/cs598_spring07/papers/Lecun98.pdf" },
+    { y:2012, pt:"Classificação ImageNet com Redes Neurais Convolucionais Profundas", orig:"ImageNet Classification with Deep Convolutional Neural Networks", auth:"Krizhevsky, Sutskever e Hinton", tag:"Deep Learning", desc:"AlexNet. Transformou uma fabricante de plaquinhas de videogame na empresa mais poderosa do planeta com duas GPUs velhas.", url:"https://proceedings.neurips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf" },
+    { y:2017, pt:"Atenção é Tudo que Você Precisa", orig:"Attention Is All You Need", auth:"Vaswani et al.", tag:"Transformers", desc:"O transformer. Esse paper é a razão pela qual você está lendo essa lista preocupado com seu emprego.", url:"https://arxiv.org/abs/1706.03762" }
+  ]}
+];
+
+var activeCat = 'all';
+var search = '';
+
+function render() {
+  var s = search.toLowerCase();
+  var main = document.getElementById('main-content');
+  var total = 0;
+  var html = '';
+
+  for (var i = 0; i < D.length; i++) {
+    var cat = D[i];
+    if (activeCat !== 'all' && activeCat !== cat.cat) continue;
+    var filtered = [];
+    for (var j = 0; j < cat.papers.length; j++) {
+      var p = cat.papers[j];
+      if (!s || (p.pt+p.orig+p.auth+p.desc+p.y+p.tag).toLowerCase().indexOf(s) >= 0) {
+        filtered.push(p);
+      }
+    }
+    if (!filtered.length) continue;
+    total += filtered.length;
+
+    var cards = '';
+    for (var k = 0; k < filtered.length; k++) {
+      var p = filtered[k];
+      cards += '<div class="paper-card">'
+        + '<div class="paper-meta"><span class="paper-year">'+p.y+'</span><span class="paper-tag">'+p.tag+'</span></div>'
+        + '<div class="paper-title-pt">'+p.pt+'</div>'
+        + '<div class="paper-title-original">'+p.orig+'</div>'
+        + '<div class="paper-authors">'+p.auth+'</div>'
+        + '<div class="paper-desc">'+p.desc+'</div>'
+        + '<a class="paper-link" href="'+p.url+'" target="_blank" rel="noopener">Acessar original ↗</a>'
+        + '</div>';
+    }
+
+    html += '<section class="category-section">'
+      + '<div class="category-header">'
+      + '<h2 class="category-name">'+cat.name+'</h2>'
+      + '<span class="category-subtitle">'+filtered.length+' artigo'+(filtered.length>1?'s':'')+'</span>'
+      + '</div>'
+      + (cat.desc ? '<p class="category-desc">'+cat.desc+'</p>' : '')
+      + '<div class="papers-grid">'+cards+'</div>'
+      + '</section>';
+  }
+
+  if (!total) html = '<div class="empty">Nenhum artigo encontrado para "'+search+'".</div>';
+  main.innerHTML = html;
+
+  document.getElementById('count-display').textContent = total+' artigos · '+(activeCat==='all'?'5 categorias':'1 categoria');
+  document.getElementById('footer-count').textContent = total+' artigos listados';
+
+  var btns = document.querySelectorAll('.filter-btn');
+  for (var b = 0; b < btns.length; b++) {
+    btns[b].className = 'filter-btn' + (btns[b].getAttribute('data-filter') === activeCat ? ' active' : '');
+  }
+}
+
+document.getElementById('filters').addEventListener('click', function(e) {
+  var btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  activeCat = btn.getAttribute('data-filter');
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+document.getElementById('search-input').addEventListener('input', function(e) {
+  search = e.target.value.trim();
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
