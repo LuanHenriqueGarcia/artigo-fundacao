@@ -1,0 +1,2035 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escrituras — Personagens Bíblicos</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=MedievalSharp&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --ink: #1a0a0a;
+        --parch: #f2e8d5;
+        --parch2: #e8d9be;
+        --parch3: #d9c9a8;
+        --red: #8b1a1a;
+        --red2: #c0392b;
+        --gold: #8b6914;
+        --gold2: #c9a227;
+        --purple: #3d1a5c;
+        --teal: #1a4a47;
+        --shadow: rgba(26, 10, 10, 0.35);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: #0f0a05;
+        color: var(--ink);
+        font-family: "IM Fell English", Georgia, serif;
+        overflow-x: hidden;
+      }
+
+      /* ═══ CAPA / SPLASH ═══ */
+      .splash {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #0f0a05;
+      }
+
+      .splash-bg {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 60% 50% at 50% 40%,
+            rgba(139, 26, 26, 0.18),
+            transparent
+          ),
+          radial-gradient(
+            ellipse 40% 60% at 20% 80%,
+            rgba(61, 26, 92, 0.12),
+            transparent
+          ),
+          radial-gradient(
+            ellipse 40% 40% at 80% 20%,
+            rgba(26, 74, 71, 0.1),
+            transparent
+          );
+      }
+
+      /* Decorative cross lines */
+      .splash-cross {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 600px;
+        pointer-events: none;
+        opacity: 0.06;
+      }
+      .splash-cross::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          #c9a227,
+          transparent
+        );
+      }
+      .splash-cross::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          #c9a227,
+          transparent
+        );
+      }
+
+      .splash-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 40px 24px;
+      }
+
+      .splash-latin {
+        font-family: "Cinzel", serif;
+        font-size: 11px;
+        letter-spacing: 8px;
+        color: #c9a227;
+        opacity: 0.5;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        animation: fadeIn 1.2s ease both;
+      }
+
+      .splash-ornament {
+        font-size: 28px;
+        color: #8b1a1a;
+        opacity: 0.6;
+        margin-bottom: 20px;
+        animation: fadeIn 1s 0.2s ease both;
+        letter-spacing: 16px;
+      }
+
+      .splash-title {
+        font-family: "Uncial Antiqua", serif;
+        font-size: clamp(42px, 8vw, 100px);
+        color: #f2e8d5;
+        line-height: 1.05;
+        text-shadow:
+          0 0 80px rgba(139, 26, 26, 0.4),
+          0 4px 30px rgba(0, 0, 0, 0.8);
+        animation: fadeIn 1s 0.3s ease both;
+        margin-bottom: 8px;
+      }
+
+      .splash-subtitle {
+        font-family: "Cinzel Decorative", serif;
+        font-size: clamp(12px, 2vw, 18px);
+        color: #c9a227;
+        letter-spacing: 4px;
+        margin-top: 14px;
+        animation: fadeIn 1s 0.4s ease both;
+      }
+
+      .splash-desc {
+        font-family: "IM Fell English", serif;
+        font-size: 16px;
+        font-style: italic;
+        color: rgba(242, 232, 213, 0.45);
+        margin-top: 20px;
+        animation: fadeIn 1s 0.5s ease both;
+      }
+
+      /* Filter pills */
+      .splash-filters {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 50px;
+        flex-wrap: wrap;
+        animation: fadeIn 1s 0.6s ease both;
+      }
+      .pill {
+        padding: 8px 22px;
+        border: 1px solid rgba(201, 162, 39, 0.3);
+        background: rgba(201, 162, 39, 0.05);
+        color: rgba(201, 162, 39, 0.7);
+        font-family: "Cinzel", serif;
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 30px;
+        transition: all 0.25s;
+        backdrop-filter: blur(4px);
+      }
+      .pill:hover,
+      .pill.active {
+        background: rgba(139, 26, 26, 0.4);
+        border-color: #8b1a1a;
+        color: #f2e8d5;
+      }
+
+      .splash-scroll {
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        animation: fadeIn 1s 0.9s ease both;
+        cursor: pointer;
+        opacity: 0.4;
+        transition: opacity 0.2s;
+      }
+      .splash-scroll:hover {
+        opacity: 0.8;
+      }
+      .splash-scroll span {
+        font-family: "Cinzel", serif;
+        font-size: 8px;
+        letter-spacing: 4px;
+        color: #c9a227;
+        text-transform: uppercase;
+      }
+      .scroll-line {
+        width: 1px;
+        height: 40px;
+        background: linear-gradient(to bottom, #c9a227, transparent);
+        animation: scrollPulse 2s ease-in-out infinite;
+      }
+
+      /* ═══ SCROLL / MANUSCRIPT AREA ═══ */
+      .manuscript {
+        background: var(--parch);
+        position: relative;
+        box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.8);
+      }
+
+      /* Torn edge top */
+      .manuscript::before {
+        content: "";
+        position: absolute;
+        top: -18px;
+        left: 0;
+        right: 0;
+        height: 20px;
+        background: var(--parch);
+        clip-path: polygon(
+          0% 100%,
+          2% 40%,
+          4% 90%,
+          6% 20%,
+          8% 80%,
+          10% 10%,
+          12% 70%,
+          14% 30%,
+          16% 85%,
+          18% 15%,
+          20% 60%,
+          22% 5%,
+          24% 75%,
+          26% 25%,
+          28% 90%,
+          30% 40%,
+          32% 100%,
+          34% 50%,
+          36% 0%,
+          38% 70%,
+          40% 20%,
+          42% 80%,
+          44% 10%,
+          46% 65%,
+          48% 30%,
+          50% 95%,
+          52% 40%,
+          54% 85%,
+          56% 15%,
+          58% 60%,
+          60% 5%,
+          62% 75%,
+          64% 25%,
+          66% 90%,
+          68% 35%,
+          70% 70%,
+          72% 20%,
+          74% 85%,
+          76% 10%,
+          78% 50%,
+          80% 0%,
+          82% 65%,
+          84% 30%,
+          86% 80%,
+          88% 25%,
+          90% 70%,
+          92% 15%,
+          94% 55%,
+          96% 5%,
+          98% 60%,
+          100% 20%,
+          100% 100%
+        );
+      }
+
+      /* Parchment texture */
+      .manuscript::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 28px,
+            rgba(139, 105, 20, 0.06) 28px,
+            rgba(139, 105, 20, 0.06) 29px
+          ),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ── CHAPTER HEADER ── */
+      .chapter-header {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 70px 24px 20px;
+        border-bottom: 2px double var(--parch3);
+      }
+      .chapter-number {
+        font-family: "Uncial Antiqua", serif;
+        font-size: 13px;
+        color: var(--red);
+        letter-spacing: 4px;
+        margin-bottom: 8px;
+      }
+      .chapter-title {
+        font-family: "Cinzel Decorative", serif;
+        font-size: clamp(22px, 4vw, 40px);
+        font-weight: 700;
+        color: var(--ink);
+        letter-spacing: 2px;
+      }
+      .chapter-rule {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 20px auto 0;
+        max-width: 400px;
+        justify-content: center;
+      }
+      .chapter-rule::before,
+      .chapter-rule::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--gold);
+        opacity: 0.5;
+      }
+      .chapter-rule span {
+        color: var(--red);
+        font-size: 14px;
+      }
+
+      /* ── ENTRY (each character) ── */
+      .entry {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        min-height: 420px;
+        border-bottom: 1px solid var(--parch3);
+        transition: background 0.3s;
+        cursor: pointer;
+      }
+      .entry:hover {
+        background: rgba(139, 26, 26, 0.03);
+      }
+      .entry.hidden {
+        display: none;
+      }
+
+      /* Alternating direction */
+      .entry:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+
+      /* Large drop-cap letter */
+      .entry-letter {
+        position: absolute;
+        font-family: "Uncial Antiqua", serif;
+        font-size: 120px;
+        line-height: 1;
+        color: var(--red);
+        opacity: 0.07;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .entry:nth-child(odd) .entry-letter {
+        left: 330px;
+        top: 20px;
+      }
+      .entry:nth-child(even) .entry-letter {
+        right: 330px;
+        top: 20px;
+      }
+
+      /* Image panel */
+      .entry-img {
+        width: 320px;
+        flex-shrink: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .entry-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        filter: sepia(40%) contrast(1.1) brightness(0.88);
+        transition:
+          filter 0.5s,
+          transform 0.6s;
+        display: block;
+      }
+      .entry:hover .entry-img img {
+        filter: sepia(20%) contrast(1.15) brightness(0.95);
+        transform: scale(1.04);
+      }
+
+      /* Vertical color accent bar */
+      .entry-img::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 5px;
+        height: 100%;
+        background: var(--ec);
+        opacity: 0.7;
+      }
+      .entry:nth-child(even) .entry-img::after {
+        right: auto;
+        left: 0;
+      }
+
+      /* Alignment ribbon */
+      .entry-ribbon {
+        position: absolute;
+        top: 28px;
+        right: -32px;
+        transform: rotate(45deg);
+        width: 110px;
+        padding: 5px 0;
+        text-align: center;
+        background: var(--ec);
+        font-family: "Cinzel", serif;
+        font-size: 8px;
+        letter-spacing: 2px;
+        color: var(--parch);
+        text-transform: uppercase;
+        z-index: 3;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+      .entry:nth-child(even) .entry-ribbon {
+        right: auto;
+        left: -32px;
+        transform: rotate(-45deg);
+      }
+
+      /* Text panel */
+      .entry-body {
+        flex: 1;
+        padding: 48px 52px;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .entry-meta {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+      .entry-era {
+        font-family: "Cinzel", serif;
+        font-size: 9px;
+        letter-spacing: 3px;
+        color: var(--ec);
+        text-transform: uppercase;
+        filter: brightness(0.8);
+      }
+      .entry-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--parch3);
+      }
+      .entry-role {
+        font-family: "Cinzel", serif;
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: var(--text3, #7a7060);
+        text-transform: uppercase;
+      }
+
+      .entry-name {
+        font-family: "Uncial Antiqua", serif;
+        font-size: clamp(28px, 4vw, 52px);
+        color: var(--ink);
+        line-height: 1.1;
+        margin-bottom: 6px;
+        transition: color 0.2s;
+      }
+      .entry:hover .entry-name {
+        color: var(--red);
+      }
+
+      .entry-subtitle {
+        font-family: "IM Fell English", serif;
+        font-style: italic;
+        font-size: 14px;
+        color: #7a6850;
+        margin-bottom: 24px;
+      }
+
+      /* Illuminated quote */
+      .entry-quote {
+        position: relative;
+        padding: 16px 20px 16px 28px;
+        border-left: 3px solid var(--ec);
+        background: rgba(139, 105, 20, 0.06);
+        margin-bottom: 24px;
+      }
+      .entry-quote::before {
+        content: "\201C";
+        position: absolute;
+        top: -10px;
+        left: 8px;
+        font-family: "Uncial Antiqua", serif;
+        font-size: 48px;
+        color: var(--ec);
+        opacity: 0.3;
+        line-height: 1;
+      }
+      .entry-quote p {
+        font-size: 16px;
+        font-style: italic;
+        color: #4a3828;
+        line-height: 1.65;
+      }
+      .entry-quote cite {
+        display: block;
+        font-size: 11px;
+        color: #9a8870;
+        font-style: normal;
+        font-family: "Cinzel", serif;
+        letter-spacing: 1px;
+        margin-top: 8px;
+      }
+
+      .entry-bio {
+        font-size: 15px;
+        line-height: 1.85;
+        color: #3a2a1a;
+        margin-bottom: 28px;
+        /* limit lines */
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .entry-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 22px;
+        border: 1px solid var(--ec);
+        background: transparent;
+        color: var(--ec);
+        font-family: "Cinzel", serif;
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.25s;
+        align-self: flex-start;
+        filter: brightness(0.85);
+      }
+      .entry-cta::after {
+        content: "→";
+        transition: transform 0.2s;
+      }
+      .entry-cta:hover {
+        background: var(--ec);
+        color: var(--parch);
+        filter: brightness(1);
+      }
+      .entry-cta:hover::after {
+        transform: translateX(4px);
+      }
+
+      /* Side ornament */
+      .entry-ornament {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 40px;
+        color: var(--parch3);
+        opacity: 0.6;
+        pointer-events: none;
+        line-height: 1;
+        writing-mode: vertical-rl;
+        font-family: "Cinzel", serif;
+        font-size: 9px;
+        letter-spacing: 4px;
+        color: var(--ec);
+        opacity: 0.2;
+        text-transform: uppercase;
+        filter: brightness(0.7);
+      }
+      .entry:nth-child(even) .entry-ornament {
+        right: auto;
+        left: 20px;
+      }
+
+      /* ── MODAL — Scroll unroll ── */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 5, 0, 0.9);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+        backdrop-filter: blur(4px);
+      }
+      .overlay.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .scroll-modal {
+        background: var(--parch);
+        max-width: 900px;
+        width: 100%;
+        max-height: 92vh;
+        overflow-y: auto;
+        position: relative;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        /* Parchment stripes */
+        background-image: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 28px,
+          rgba(139, 105, 20, 0.05) 28px,
+          rgba(139, 105, 20, 0.05) 29px
+        );
+      }
+      .overlay.open .scroll-modal {
+        transform: scaleY(1);
+      }
+
+      .scroll-modal::-webkit-scrollbar {
+        width: 5px;
+      }
+      .scroll-modal::-webkit-scrollbar-track {
+        background: var(--parch2);
+      }
+      .scroll-modal::-webkit-scrollbar-thumb {
+        background: var(--parch3);
+      }
+
+      /* Modal top wax seal area */
+      .modal-seal {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 32px 36px 0;
+      }
+      .modal-seal-circle {
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: var(--mc, #8b1a1a);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        box-shadow:
+          0 3px 12px rgba(0, 0, 0, 0.3),
+          inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+        flex-shrink: 0;
+      }
+      .modal-close {
+        background: transparent;
+        border: 1px solid var(--parch3);
+        color: #7a6850;
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        border-radius: 2px;
+        font-size: 13px;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-close:hover {
+        border-color: var(--red);
+        color: var(--red);
+      }
+
+      /* Modal illuminated header */
+      .modal-illuminated {
+        display: flex;
+        gap: 28px;
+        padding: 20px 36px 28px;
+        border-bottom: 2px double var(--parch3);
+      }
+      .modal-portrait {
+        width: 110px;
+        height: 150px;
+        object-fit: cover;
+        object-position: top;
+        filter: sepia(35%) contrast(1.1) brightness(0.9);
+        border: 2px solid var(--gold);
+        flex-shrink: 0;
+        box-shadow:
+          4px 4px 0 var(--parch3),
+          4px 4px 0 1px var(--gold2);
+      }
+      .modal-title-block {
+        flex: 1;
+      }
+      .modal-period {
+        font-family: "Cinzel", serif;
+        font-size: 9px;
+        letter-spacing: 3px;
+        color: var(--mc, #8b1a1a);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .modal-name {
+        font-family: "Uncial Antiqua", serif;
+        font-size: clamp(22px, 4vw, 38px);
+        color: var(--ink);
+        line-height: 1.1;
+        margin-bottom: 4px;
+      }
+      .modal-subtitle {
+        font-family: "IM Fell English", serif;
+        font-style: italic;
+        font-size: 14px;
+        color: #7a6850;
+        margin-bottom: 16px;
+      }
+      .modal-quote-block {
+        border-left: 3px solid var(--mc, #8b1a1a);
+        padding: 10px 14px;
+        background: rgba(139, 105, 20, 0.06);
+      }
+      .modal-quote-text {
+        font-style: italic;
+        font-size: 15px;
+        color: #4a3828;
+        line-height: 1.55;
+      }
+      .modal-quote-ref {
+        font-family: "Cinzel", serif;
+        font-size: 9px;
+        letter-spacing: 1px;
+        color: #9a8870;
+        margin-top: 6px;
+      }
+
+      /* Modal tabs — like chapter markers */
+      .modal-tabs {
+        display: flex;
+        border-bottom: 1px solid var(--parch3);
+        background: var(--parch2);
+        padding: 0 36px;
+        gap: 0;
+        overflow-x: auto;
+      }
+      .modal-tab {
+        padding: 14px 20px;
+        border: none;
+        background: transparent;
+        border-bottom: 3px solid transparent;
+        font-family: "Cinzel", serif;
+        font-size: 9px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #9a8870;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-bottom: -1px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .modal-tab:hover {
+        color: var(--ink);
+      }
+      .modal-tab.active {
+        color: var(--red);
+        border-bottom-color: var(--red);
+      }
+
+      /* Panels */
+      .mpanel {
+        display: none;
+        padding: 32px 36px 40px;
+      }
+      .mpanel.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .m-bio {
+        font-size: 17px;
+        line-height: 1.95;
+        color: #3a2a1a;
+        text-align: justify;
+        text-indent: 2em;
+      }
+      .m-bio::first-letter {
+        font-family: "Uncial Antiqua", serif;
+        font-size: 56px;
+        float: left;
+        line-height: 0.85;
+        margin: 6px 8px 0 0;
+        color: var(--mc, #8b1a1a);
+      }
+
+      .m-sym-item {
+        display: flex;
+        gap: 18px;
+        align-items: flex-start;
+        padding: 16px 0;
+        border-bottom: 1px dotted var(--parch3);
+      }
+      .m-sym-item:last-child {
+        border-bottom: none;
+      }
+      .m-sym-icon {
+        width: 44px;
+        height: 44px;
+        border: 1px solid var(--gold);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        background: var(--parch2);
+        flex-shrink: 0;
+        box-shadow: 2px 2px 0 var(--parch3);
+      }
+      .m-sym-text {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #3a2a1a;
+        padding-top: 10px;
+      }
+
+      .m-persp-intro {
+        font-style: italic;
+        font-size: 14px;
+        color: #7a6850;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px dotted var(--parch3);
+      }
+      .m-persp-item {
+        padding: 20px 0;
+        border-bottom: 1px dotted var(--parch3);
+        display: flex;
+        gap: 18px;
+        align-items: flex-start;
+      }
+      .m-persp-item:last-child {
+        border-bottom: none;
+      }
+      .m-persp-marker {
+        width: 6px;
+        flex-shrink: 0;
+        align-self: stretch;
+        background: var(--mc, #8b1a1a);
+        border-radius: 3px;
+        opacity: 0.5;
+        margin-top: 4px;
+      }
+      .m-persp-source {
+        font-family: "Cinzel", serif;
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: var(--mc, #8b1a1a);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        filter: brightness(0.75);
+      }
+      .m-persp-view {
+        font-size: 16px;
+        line-height: 1.75;
+        color: #4a3828;
+        font-style: italic;
+      }
+
+      .m-ref-item {
+        display: flex;
+        gap: 0;
+        margin-bottom: 16px;
+      }
+      .m-ref-book {
+        font-family: "Cinzel", serif;
+        font-size: 10px;
+        letter-spacing: 1px;
+        color: var(--mc, #8b1a1a);
+        min-width: 120px;
+        padding: 14px 16px;
+        background: var(--parch2);
+        border: 1px solid var(--parch3);
+        display: flex;
+        align-items: center;
+        filter: brightness(0.85);
+      }
+      .m-ref-desc {
+        font-size: 15px;
+        font-style: italic;
+        color: #4a3828;
+        padding: 14px 16px;
+        border: 1px solid var(--parch3);
+        border-left: none;
+        flex: 1;
+        line-height: 1.6;
+      }
+
+      /* ── FOOTER ── */
+      .ms-footer {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 60px 24px;
+        border-top: 2px double var(--parch3);
+      }
+      .ms-footer p {
+        font-style: italic;
+        font-size: 15px;
+        color: #7a6850;
+      }
+      .ms-footer .forn {
+        font-family: "Cinzel", serif;
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: var(--gold);
+        margin-top: 10px;
+        opacity: 0.6;
+      }
+
+      /* Dark outro */
+      .dark-footer {
+        background: #0f0a05;
+        text-align: center;
+        padding: 30px;
+      }
+      .dark-footer p {
+        font-family: "Cinzel", serif;
+        font-size: 9px;
+        letter-spacing: 4px;
+        color: rgba(201, 162, 39, 0.25);
+        text-transform: uppercase;
+      }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes scrollPulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scaleY(1);
+        }
+        50% {
+          opacity: 0.3;
+          transform: scaleY(0.7);
+        }
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 700px) {
+        .entry {
+          flex-direction: column !important;
+        }
+        .entry-img {
+          width: 100%;
+          height: 220px;
+        }
+        .entry-img::after {
+          top: auto;
+          bottom: 0;
+          right: 0;
+          width: 100%;
+          height: 4px;
+        }
+        .entry:nth-child(even) .entry-img::after {
+          left: 0;
+        }
+        .entry-body {
+          padding: 28px 24px;
+        }
+        .entry-letter {
+          display: none;
+        }
+        .entry-ornament {
+          display: none;
+        }
+        .modal-illuminated {
+          flex-wrap: wrap;
+        }
+        .modal-portrait {
+          width: 80px;
+          height: 100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ═══ SPLASH ═══ -->
+    <section class="splash">
+      <div class="splash-bg"></div>
+      <div class="splash-cross"></div>
+      <div class="splash-content">
+        <p class="splash-latin">In Principio Erat Verbum</p>
+        <div class="splash-ornament">✝ ✦ ✝</div>
+        <h1 class="splash-title">Escrituras</h1>
+        <p class="splash-subtitle">Personagens Bíblicos</p>
+        <p class="splash-desc">
+          Figuras que moldaram a fé, a arte e a imaginação do mundo
+        </p>
+
+        <div class="splash-filters">
+          <button class="pill active" onclick="filterEntries('todos', this)">
+            Todos
+          </button>
+          <button class="pill" onclick="filterEntries('Luz', this)">
+            ✦ Luz
+          </button>
+          <button class="pill" onclick="filterEntries('Sombra', this)">
+            ☽ Sombra
+          </button>
+          <button class="pill" onclick="filterEntries('Ambíguo', this)">
+            ⚖ Ambíguo
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="splash-scroll"
+        onclick="
+          document
+            .querySelector('.manuscript')
+            .scrollIntoView({ behavior: 'smooth' })
+        "
+      >
+        <span>Rolar</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ═══ MANUSCRIPT ═══ -->
+    <main class="manuscript">
+      <div class="chapter-header">
+        <p class="chapter-number">Liber I · Capítulo das Almas</p>
+        <h2 class="chapter-title">Os Que Foram Escritos</h2>
+        <div class="chapter-rule"><span>✦</span></div>
+      </div>
+
+      <!-- JEZABEL -->
+      <article
+        class="entry"
+        data-align="Sombra"
+        style="--ec: #8b1a1a"
+        onclick="openModal('jezabel')"
+      >
+        <div class="entry-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/John_Liston_Byam_Shaw_003.jpg/250px-John_Liston_Byam_Shaw_003.jpg"
+            alt="Jezabel"
+          />
+          <div class="entry-ribbon">Sombra</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-letter">J</div>
+          <div class="entry-meta">
+            <span class="entry-era">Séc. IX a.C.</span>
+            <div class="entry-dot"></div>
+            <span class="entry-role">Rainha · Fenícia</span>
+          </div>
+          <h2 class="entry-name">Jezabel</h2>
+          <p class="entry-subtitle">A Rainha Idólatra · Esposa de Acabe</p>
+          <div class="entry-quote">
+            <p>"Acaso veio Zimri com paz, ele que matou ao seu senhor?"</p>
+            <cite>2 Reis 9:31</cite>
+          </div>
+          <p class="entry-bio">
+            Filha do rei de Sidom, Jezabel casou-se com o rei Acabe de Israel e
+            tornou-se a figura feminina mais temida das Escrituras Hebraicas.
+            Introduziu o culto a Baal, perseguiu profetas e manipulou o reino
+            com mão de ferro até sua queda profetizada.
+          </p>
+          <button class="entry-cta">Ler a história completa</button>
+          <span class="entry-ornament">Jezabel · Rainha</span>
+        </div>
+      </article>
+
+      <!-- LILITH -->
+      <article
+        class="entry"
+        data-align="Sombra"
+        style="--ec: #5a2fa0"
+        onclick="openModal('lilith')"
+      >
+        <div class="entry-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Lilith_%28John_Collier_painting%29.jpg/250px-Lilith_%28John_Collier_painting%29.jpg"
+            alt="Lilith"
+          />
+          <div class="entry-ribbon">Sombra</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-letter">L</div>
+          <div class="entry-meta">
+            <span class="entry-era">Mitologia Hebraica</span>
+            <div class="entry-dot"></div>
+            <span class="entry-role">Demônio · Noite</span>
+          </div>
+          <h2 class="entry-name">Lilith</h2>
+          <p class="entry-subtitle">A Primeira Mulher · Espírito da Noite</p>
+          <div class="entry-quote">
+            <p>"Não fui criada para me submeter, mas para ser igual."</p>
+            <cite>Alfabeto de Ben Sira — tradição apócrifa</cite>
+          </div>
+          <p class="entry-bio">
+            Sua lenda floresceu na tradição judaica extrabíblica. Criada do
+            mesmo barro que Adão, recusou submissão e fugiu do Éden, tornando-se
+            demônio da noite. Das figuras mais fascinantes do misticismo
+            ocidental.
+          </p>
+          <button class="entry-cta">Ler a história completa</button>
+          <span class="entry-ornament">Lilith · Demônio</span>
+        </div>
+      </article>
+
+      <!-- MOISÉS -->
+      <article
+        class="entry"
+        data-align="Luz"
+        style="--ec: #7a5a00"
+        onclick="openModal('moises')"
+      >
+        <div class="entry-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Moses041.jpg/250px-Moses041.jpg"
+            alt="Moisés"
+          />
+          <div class="entry-ribbon">Luz</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-letter">M</div>
+          <div class="entry-meta">
+            <span class="entry-era">Séc. XIII a.C.</span>
+            <div class="entry-dot"></div>
+            <span class="entry-role">Profeta · Israel</span>
+          </div>
+          <h2 class="entry-name">Moisés</h2>
+          <p class="entry-subtitle">O Libertador · Portador da Lei</p>
+          <div class="entry-quote">
+            <p>"Deixa o meu povo ir."</p>
+            <cite>Êxodo 5:1</cite>
+          </div>
+          <p class="entry-bio">
+            Nascido hebreu, criado como príncipe egípcio, chamado por Deus numa
+            sarça ardente. O maior profeta do Judaísmo percorreu todas as
+            fronteiras da identidade antes de liderar o Êxodo e receber os Dez
+            Mandamentos no Sinai.
+          </p>
+          <button class="entry-cta">Ler a história completa</button>
+          <span class="entry-ornament">Moisés · Profeta</span>
+        </div>
+      </article>
+
+      <!-- SALOMÉ -->
+      <article
+        class="entry"
+        data-align="Ambíguo"
+        style="--ec: #1a4a47"
+        onclick="openModal('salome')"
+      >
+        <div class="entry-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Salome_with_the_Baptist%27s_head_-_Charles_Mellin.jpg/250px-Salome_with_the_Baptist%27s_head_-_Charles_Mellin.jpg"
+            alt="Salomé"
+          />
+          <div class="entry-ribbon">Ambíguo</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-letter">S</div>
+          <div class="entry-meta">
+            <span class="entry-era">Séc. I d.C.</span>
+            <div class="entry-dot"></div>
+            <span class="entry-role">Princesa · Galileia</span>
+          </div>
+          <h2 class="entry-name">Salomé</h2>
+          <p class="entry-subtitle">A Dançarina · Filha de Herodíades</p>
+          <div class="entry-quote">
+            <p>"Dá-me aqui, num prato, a cabeça de João Batista."</p>
+            <cite>Mateus 14:8</cite>
+          </div>
+          <p class="entry-bio">
+            O Evangelho não cita seu nome — identificada por Flávio Josefo. Sua
+            dança encantou Herodes Antipas, e o pedido que se seguiu tornou-se
+            uma das imagens mais representadas na arte ocidental, da pintura
+            renascentista à ópera.
+          </p>
+          <button class="entry-cta">Ler a história completa</button>
+          <span class="entry-ornament">Salomé · Dançarina</span>
+        </div>
+      </article>
+
+      <!-- MARIA MADALENA -->
+      <article
+        class="entry"
+        data-align="Luz"
+        style="--ec: #7a5a00"
+        onclick="openModal('madalena')"
+      >
+        <div class="entry-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/TINTORETTO_-_Magdalena_penitente_%28Musei_Capitolini%2C_Roma%2C_1598-1602%29_-_copia.jpg/250px-TINTORETTO_-_Magdalena_penitente_%28Musei_Capitolini%2C_Roma%2C_1598-1602%29_-_copia.jpg"
+            alt="Maria Madalena"
+          />
+          <div class="entry-ribbon">Luz</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-letter">M</div>
+          <div class="entry-meta">
+            <span class="entry-era">Séc. I d.C.</span>
+            <div class="entry-dot"></div>
+            <span class="entry-role">Discípula · Judeia</span>
+          </div>
+          <h2 class="entry-name">Maria Madalena</h2>
+          <p class="entry-subtitle">A Apóstola dos Apóstolos</p>
+          <div class="entry-quote">
+            <p>"Vi o Senhor!"</p>
+            <cite>João 20:18 — Primeira testemunha da Ressurreição</cite>
+          </div>
+          <p class="entry-bio">
+            Primeira a testemunhar a Ressurreição — título que lhe valeu o
+            epíteto "Apóstola dos Apóstolos". Por séculos confundida com uma
+            prostituta arrependida, identificação sem base bíblica corrigida
+            pelo Vaticano apenas em 1969.
+          </p>
+          <button class="entry-cta">Ler a história completa</button>
+          <span class="entry-ornament">Madalena · Apóstola</span>
+        </div>
+      </article>
+
+      <!-- JUDAS -->
+      <article
+        class="entry"
+        data-align="Ambíguo"
+        style="--ec: #6b1a1a"
+        onclick="openModal('judas')"
+      >
+        <div class="entry-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Almeida_J%C3%BAnior_-_Remorso_de_Judas%2C_1880.jpg/250px-Almeida_J%C3%BAnior_-_Remorso_de_Judas%2C_1880.jpg"
+            alt="Judas"
+          />
+          <div class="entry-ribbon">Ambíguo</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-letter">J</div>
+          <div class="entry-meta">
+            <span class="entry-era">Séc. I d.C.</span>
+            <div class="entry-dot"></div>
+            <span class="entry-role">Apóstolo · Queriote</span>
+          </div>
+          <h2 class="entry-name">Judas Iscariotes</h2>
+          <p class="entry-subtitle">O Traidor · O Instrumento</p>
+          <div class="entry-quote">
+            <p>"Pecai entregando sangue inocente."</p>
+            <cite>Mateus 27:4</cite>
+          </div>
+          <p class="entry-bio">
+            Um dos doze apóstolos, entregou Jesus por trinta moedas de prata.
+            Mas a questão que atravessa dois milênios permanece: agiu por
+            ganância, desespero teológico — ou, como sugere o Evangelho gnóstico
+            de Judas, por instrução do próprio Mestre?
+          </p>
+          <button class="entry-cta">Ler a história completa</button>
+          <span class="entry-ornament">Judas · Traidor</span>
+        </div>
+      </article>
+
+      <!-- SANSÃO -->
+      <article
+        class="entry"
+        data-align="Ambíguo"
+        style="--ec: #7a5a00"
+        onclick="openModal('sansao')"
+      >
+        <div class="entry-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Lucas_Cranach_d.%C3%84._-_Simson_bezwingt_den_L%C3%B6wen.jpg/250px-Lucas_Cranach_d.%C3%84._-_Simson_bezwingt_den_L%C3%B6wen.jpg"
+            alt="Sansão"
+          />
+          <div class="entry-ribbon">Ambíguo</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-letter">S</div>
+          <div class="entry-meta">
+            <span class="entry-era">Séc. XII a.C.</span>
+            <div class="entry-dot"></div>
+            <span class="entry-role">Juiz · Israel</span>
+          </div>
+          <h2 class="entry-name">Sansão</h2>
+          <p class="entry-subtitle">O Herói Trágico · O Nazireu</p>
+          <div class="entry-quote">
+            <p>"Morra a minha alma com os filisteus!"</p>
+            <cite>Juízes 16:30</cite>
+          </div>
+          <p class="entry-bio">
+            Consagrado a Deus antes de nascer, dotado de força sobre-humana
+            vinculada ao voto nazireno. Sua vida foi marcada pela contradição
+            entre a missão divina e as fraquezas humanas — traído por Dalila,
+            encontrou grandeza na morte.
+          </p>
+          <button class="entry-cta">Ler a história completa</button>
+          <span class="entry-ornament">Sansão · Juiz</span>
+        </div>
+      </article>
+
+      <!-- LÚCIFER -->
+      <article
+        class="entry"
+        data-align="Sombra"
+        style="--ec: #3d1a5c"
+        onclick="openModal('lucifer')"
+      >
+        <div class="entry-img">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Lucifer_%28the_morning_star%29._Engraving_by_G.H._Frezza%2C_1704%2C_Wellcome_V0035916.jpg/250px-Lucifer_%28the_morning_star%29._Engraving_by_G.H._Frezza%2C_1704%2C_Wellcome_V0035916.jpg"
+            alt="Lúcifer"
+          />
+          <div class="entry-ribbon">Sombra</div>
+        </div>
+        <div class="entry-body">
+          <div class="entry-letter">L</div>
+          <div class="entry-meta">
+            <span class="entry-era">Antes dos Tempos</span>
+            <div class="entry-dot"></div>
+            <span class="entry-role">Anjo Caído · Céu</span>
+          </div>
+          <h2 class="entry-name">Lúcifer</h2>
+          <p class="entry-subtitle">O Portador da Luz · O Adversário</p>
+          <div class="entry-quote">
+            <p>"Subirei ao céu... serei semelhante ao Altíssimo."</p>
+            <cite>Isaías 14:13–14</cite>
+          </div>
+          <p class="entry-bio">
+            O nome "Lúcifer" — Portador da Luz — aparece uma só vez na Bíblia
+            como metáfora da queda do rei da Babilônia. A tradição cristã
+            posterior transformou-o no arquétipo do mal absoluto e, para os
+            românticos, no herói da rebeldia sublime.
+          </p>
+          <button class="entry-cta">Ler a história completa</button>
+          <span class="entry-ornament">Lúcifer · Adversário</span>
+        </div>
+      </article>
+
+      <!-- FOOTER MANUSCRIPT -->
+      <div class="ms-footer">
+        <p>
+          "No princípio era o Verbo, e o Verbo estava com Deus, e o Verbo era
+          Deus."
+        </p>
+        <p class="forn">João 1:1 · Vulgata · Evangelium Secundum Ioannem</p>
+      </div>
+    </main>
+
+    <div class="dark-footer">
+      <p>
+        ✦ &nbsp; Escrituras Sagradas · Personagens Bíblicos · Projeto Cultural
+        &nbsp; ✦
+      </p>
+    </div>
+
+    <!-- ═══ MODAL ═══ -->
+    <div class="overlay" id="overlay" onclick="closeOut(event)">
+      <div class="scroll-modal" id="smodal">
+        <div class="modal-seal">
+          <div class="modal-seal-circle" id="modal-icon">✝</div>
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+
+        <div class="modal-illuminated">
+          <img src="" alt="" class="modal-portrait" id="modal-photo" />
+          <div class="modal-title-block">
+            <p class="modal-period" id="modal-period"></p>
+            <h2 class="modal-name" id="modal-name"></h2>
+            <p class="modal-subtitle" id="modal-subtitle"></p>
+            <div class="modal-quote-block">
+              <p class="modal-quote-text" id="modal-quote"></p>
+              <p class="modal-quote-ref" id="modal-ref"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-tabs">
+          <button class="modal-tab active" onclick="switchTab('bio', this)">
+            História
+          </button>
+          <button class="modal-tab" onclick="switchTab('sym', this)">
+            Simbolismo
+          </button>
+          <button class="modal-tab" onclick="switchTab('persp', this)">
+            Perspectivas
+          </button>
+          <button class="modal-tab" onclick="switchTab('refs', this)">
+            Referências
+          </button>
+        </div>
+
+        <div class="mpanel active" id="panel-bio">
+          <p class="m-bio" id="modal-bio"></p>
+        </div>
+        <div class="mpanel" id="panel-sym"><div id="modal-sym"></div></div>
+        <div class="mpanel" id="panel-persp">
+          <p class="m-persp-intro" id="modal-persp-intro"></p>
+          <div id="modal-persp"></div>
+        </div>
+        <div class="mpanel" id="panel-refs">
+          <div id="modal-refs"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const ICONS = { Sombra: "☽", Luz: "✦", Ambíguo: "⚖" };
+
+      const DATA = {
+        jezabel: {
+          color: "#8B1A1A",
+          align: "Sombra",
+          period: "Séc. IX a.C. · Fenícia / Israel",
+          name: "Jezabel",
+          subtitle: "A Rainha Idólatra · Esposa de Acabe",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/John_Liston_Byam_Shaw_-_Jezebel.jpg/400px-John_Liston_Byam_Shaw_-_Jezebel.jpg",
+          quote: '"Acaso veio Zimri com paz, ele que matou ao seu senhor?"',
+          ref: "2 Reis 9:31 — Últimas palavras de Jezabel",
+          bio: "Filha do rei de Sidom, Jezabel casou-se com o rei Acabe de Israel e tornou-se a figura feminina mais temida das Escrituras Hebraicas. Introduziu o culto a Baal e Astarote em Israel, perseguiu e matou os profetas de YHWH e manipulou a política do reino com mão de ferro. Sua morte — lançada de uma janela e devorada por cães — tornou-se símbolo de julgamento divino. Seu nome passou à história como sinônimo de sedução, manipulação e idolatria, e ressurge no próprio Apocalipse como símbolo da falsa profecia.",
+          symbolism: [
+            {
+              icon: "🔥",
+              text: "Símbolo de sedução do poder — a mulher que corrompe reis e nações por meio da influência religiosa e política",
+            },
+            {
+              icon: "🐕",
+              text: "Morte pelos cães: julgamento profetizado por Elias, cumprido à letra — o corpo que não mereceu sepultura",
+            },
+            {
+              icon: "👁",
+              text: 'O nome "Jezabel" tornou-se arquétipo cultural de mulher manipuladora, presente até no Apocalipse (Ap 2:20)',
+            },
+            {
+              icon: "🌙",
+              text: "Ligação com Astarote, deusa fenícia da fertilidade e da guerra, antítese da espiritualidade israelita",
+            },
+          ],
+          perspectives: [
+            {
+              name: "Tradição Rabínica",
+              view: "Jezabel é o exemplo perfeito da mulher que perverte a fé pública — sua influência sobre Acabe tornou-o mais culpado do que qualquer outro rei de Israel.",
+            },
+            {
+              name: "Feminismo Teológico",
+              view: "Jezabel foi uma mulher de poder em um mundo dominado por homens. Sua demonização pode refletir o medo patriarcal de uma líder política estrangeira e autônoma.",
+            },
+            {
+              name: "Apocalipse (Ap 2:20)",
+              view: 'O nome "Jezabel" é usado como pseudônimo para uma profetisa que ensinava imoralidade na igreja de Tiatira — seu legado simbólico sobreviveu por séculos.',
+            },
+          ],
+          refs: [
+            {
+              book: "1 Reis 16–21",
+              desc: "Ascensão ao poder, introdução dos cultos a Baal e o episódio da vinha de Nabote",
+            },
+            {
+              book: "2 Reis 9",
+              desc: "A morte de Jezabel pelas mãos de Jeú — cumprimento da profecia de Elias",
+            },
+            {
+              book: "Apocalipse 2:20",
+              desc: "Nome usado como símbolo de falsa profecia e imoralidade na Igreja primitiva",
+            },
+          ],
+        },
+        lilith: {
+          color: "#5A2FA0",
+          align: "Sombra",
+          period: "Mitologia · Hebraica Antiga",
+          name: "Lilith",
+          subtitle: "A Primeira Mulher · Espírito da Noite",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/JohnCollierLilith.jpg/400px-JohnCollierLilith.jpg",
+          quote: '"Não fui criada para me submeter, mas para ser igual."',
+          ref: "Ben Sira Alphabet (séc. VIII–X d.C.) — Tradição apócrifa",
+          bio: "Lilith não aparece na Bíblia canônica de forma explícita — sua lenda floresceu na tradição judaica extrabíblica, especialmente no Alfabeto de Ben Sira. Segundo esse texto, ela foi a primeira esposa de Adão, criada do mesmo barro, que recusou submissão e fugiu do Éden ao pronunciar o nome inefável de Deus. Tornou-se demônio da noite, devoradora de crianças e sedutora de homens dormentes. No Talmude de Babilônia e na Cabala, ela é rainha do Qliphoth, consorte de Samael, e uma das figuras mais complexas do misticismo ocidental.",
+          symbolism: [
+            {
+              icon: "🦉",
+              text: "A coruja — ave noturna associada a Lilith nas tradições assíria e hebraica, símbolo da sabedoria sombria e da rebeldia",
+            },
+            {
+              icon: "🐍",
+              text: "Para muitos comentadores, Lilith é identificada com a serpente do Éden — a voz da tentação e do autoconhecimento proibido",
+            },
+            {
+              icon: "🌑",
+              text: "Rainha da noite e dos sonhos eróticos — os lilins eram seus descendentes demoníacos segundo o Talmude de Babilônia",
+            },
+            {
+              icon: "⚖",
+              text: "Símbolo moderno de autonomia feminina e recusa à hierarquia de gênero — ícone do feminismo e do ocultismo contemporâneo",
+            },
+          ],
+          perspectives: [
+            {
+              name: "Misticismo Judaico (Cabala)",
+              view: "Lilith habita o reino de Geburah — rigor extremo. É consorte de Samael e rainha do Qliphoth, o lado das cascas da árvore sefirótica.",
+            },
+            {
+              name: "Feminismo Moderno",
+              view: "Lilith é o arquétipo da mulher que recusou a subordinação antes mesmo de ser formulada como pecado — precursora de toda autonomia feminina.",
+            },
+            {
+              name: "Jung / Psicologia",
+              view: "Lilith representa a Sombra feminina — o aspecto reprimido do princípio feminino que a cultura patriarcal projetou como demônio para domesticar.",
+            },
+          ],
+          refs: [
+            {
+              book: "Isaías 34:14",
+              desc: 'Única menção bíblica: "lilit" aparece entre criaturas do deserto — traduzida como "coruja" em muitas versões',
+            },
+            {
+              book: "Alfabeto de Ben Sira",
+              desc: "Texto apócrifo que narra sua criação simultânea a Adão e sua fuga do Paraíso",
+            },
+            {
+              book: "Zohar / Cabala",
+              desc: "Desenvolveu Lilith como rainha demoníaca, consorte de Samael e adversária de Eva",
+            },
+          ],
+        },
+        moises: {
+          color: "#7A5A00",
+          align: "Luz",
+          period: "Séc. XIII a.C. · Egito / Israel",
+          name: "Moisés",
+          subtitle: "O Libertador · Portador da Lei",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Rembrandt_Harmensz._van_Rijn_079.jpg/400px-Rembrandt_Harmensz._van_Rijn_079.jpg",
+          quote: '"Deixa o meu povo ir."',
+          ref: "Êxodo 5:1 — Moisés diante do Faraó",
+          bio: "Nascido hebreu, criado como príncipe egípcio, exilado no deserto e chamado por Deus numa sarça ardente — Moisés percorreu todas as fronteiras da identidade antes de liderar o Êxodo. É o maior profeta do Judaísmo, o mediador da Aliança no Sinai, o legislador que recebeu os Dez Mandamentos. Sua trajetória de hesitação, fracasso e grandeza o torna o personagem bíblico mais complexo e humano do Antigo Testamento. No Islã, é Musa — o profeta mais citado no Alcorão.",
+          symbolism: [
+            {
+              icon: "🔥",
+              text: "A sarça ardente: Deus que fala sem consumir — o mistério do sagrado que não destrói o que toca",
+            },
+            {
+              icon: "⚡",
+              text: "As tábuas da Lei: o fundamento de toda ética monoteísta ocidental, judaica, cristã e islâmica",
+            },
+            {
+              icon: "🌊",
+              text: "A abertura do mar: milagre arquétipo de libertação — o caminho aberto no impossível",
+            },
+            {
+              icon: "🏔",
+              text: "O Monte Sinai: lugar do encontro entre o humano e o divino, onde a Lei desceu ao mundo",
+            },
+          ],
+          perspectives: [
+            {
+              name: "Freud",
+              view: 'Em "Moisés e o Monoteísmo", argumentou que Moisés era egípcio e que o monoteísmo derivava do culto de Aton — e que ele foi assassinado pelo próprio povo.',
+            },
+            {
+              name: "Islamismo",
+              view: 'Musa é o profeta mais citado no Alcorão, considerado kalimullah — "aquele com quem Deus falou diretamente".',
+            },
+            {
+              name: "Teologia da Libertação",
+              view: "O Êxodo é o modelo político e teológico da libertação dos oprimidos — Moisés como arquétipo do líder que confronta o poder imperial.",
+            },
+          ],
+          refs: [
+            {
+              book: "Êxodo 1–15",
+              desc: "Nascimento, chamado divino, as dez pragas e o Êxodo do Egito",
+            },
+            {
+              book: "Êxodo 19–20",
+              desc: "A revelação no Sinai e os Dez Mandamentos",
+            },
+            {
+              book: "Deuteronômio 34",
+              desc: "Morte de Moisés às vistas da Terra Prometida, que nunca pisou",
+            },
+          ],
+        },
+        salome: {
+          color: "#1A4A47",
+          align: "Ambíguo",
+          period: "Séc. I d.C. · Galileia",
+          name: "Salomé",
+          subtitle: "A Dançarina · Filha de Herodíades",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Gustave_Moreau_-_Salome_-_Google_Art_Project.jpg/400px-Gustave_Moreau_-_Salome_-_Google_Art_Project.jpg",
+          quote: '"Dá-me aqui, num prato, a cabeça de João Batista."',
+          ref: "Mateus 14:8 — O pedido à mesa de Herodes",
+          bio: "O Evangelho não cita seu nome — ela foi identificada como Salomé apenas pelo historiador Flávio Josefo. Filha de Herodíades e enteada do tetrarca Herodes Antipas, sua dança encantou o rei que prometeu-lhe qualquer coisa. Instruída pela mãe, pediu a cabeça de João Batista. Essa cena tornou-se uma das mais representadas na arte ocidental — da pintura renascentista à ópera de Richard Strauss.",
+          symbolism: [
+            {
+              icon: "💃",
+              text: "A dança dos sete véus: símbolo do desejo como arma — o corpo como instrumento político e mortal",
+            },
+            {
+              icon: "🗡",
+              text: "A cabeça no prato: imagem da morte bela — o profeta silenciado pela sedução do poder mundano",
+            },
+            {
+              icon: "🎭",
+              text: "Arquétipo da femme fatale — símbolo do Simbolismo e do Decadentismo do séc. XIX",
+            },
+            {
+              icon: "👑",
+              text: "Ambiguidade moral: vítima da manipulação da mãe ou agente consciente? A história não responde.",
+            },
+          ],
+          perspectives: [
+            {
+              name: "Oscar Wilde",
+              view: 'Em sua peça "Salomé" (1891), ela é obcecada por João Batista, e seu beijo na cabeça decapitada é um ato de amor macabro e possessivo.',
+            },
+            {
+              name: "Teologia Cristã",
+              view: "Salomé representa a luxúria e o poder mundano que destroem a voz profética — o contraste entre o corpo que dança e a palavra que denuncia.",
+            },
+            {
+              name: "Feminismo",
+              view: "Salomé pode ser lida como instrumento da vontade de sua mãe — uma menina manipulada pelo poder adulto, não uma vilã autônoma.",
+            },
+          ],
+          refs: [
+            {
+              book: "Mateus 14:3–12",
+              desc: "O banquete, a dança e o pedido da cabeça de João Batista",
+            },
+            {
+              book: "Marcos 6:17–29",
+              desc: "Versão paralela com mais detalhes sobre a motivação de Herodíades",
+            },
+            {
+              book: "Flávio Josefo",
+              desc: 'Antiguidades Judaicas XVIII — única fonte que nomeia "Salomé"',
+            },
+          ],
+        },
+        madalena: {
+          color: "#7A5A00",
+          align: "Luz",
+          period: "Séc. I d.C. · Magdala / Judeia",
+          name: "Maria Madalena",
+          subtitle: "A Apóstola dos Apóstolos",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Georges_de_La_Tour_-_The_Penitent_Magdalene_-_WGA12337.jpg/400px-Georges_de_La_Tour_-_The_Penitent_Magdalene_-_WGA12337.jpg",
+          quote: '"Vi o Senhor!"',
+          ref: "João 20:18 — Primeira testemunha da Ressurreição",
+          bio: 'Maria de Magdala foi uma das seguidoras mais próximas de Jesus e a primeira a testemunhar a Ressurreição — título que lhe valeu o epíteto "Apóstola dos Apóstolos" na tradição cristã primitiva. Durante séculos, a Igreja Ocidental confundiu-a com uma prostituta arrependida, identificação sem base bíblica que só foi corrigida pelo Vaticano em 1969. O Evangelho de Maria, texto gnóstico, a apresenta como a discípula mais amada, depositária dos ensinamentos secretos de Jesus.',
+          symbolism: [
+            {
+              icon: "💜",
+              text: "O frasco de alabastro com perfume: oferenda de amor total — o luxo convertido em devoção",
+            },
+            {
+              icon: "🌅",
+              text: "A primeira luz da Páscoa: primeira a ver o ressuscitado, antes mesmo dos apóstolos homens",
+            },
+            {
+              icon: "📖",
+              text: "O Evangelho de Maria: texto gnóstico que a coloca como a verdadeira herdeira espiritual de Jesus",
+            },
+            {
+              icon: "🐚",
+              text: "Na tradição provençal, viveu trinta anos em penitência numa caverna na França — fundindo mito e devoção",
+            },
+          ],
+          perspectives: [
+            {
+              name: "Gnosticismo",
+              view: "No Evangelho de Filipe e de Maria, ela é a companheira (koinonos) de Jesus — a discípula que compreendeu mais profundamente seus ensinamentos espirituais.",
+            },
+            {
+              name: "Papa Gregório I (séc. VI)",
+              view: "Fundiu três mulheres do Evangelho em uma só, criando o mito da prostituta arrependida — confusão que influenciou a arte e a teologia por 1400 anos.",
+            },
+            {
+              name: "Dan Brown / Cultura Pop",
+              view: "O Código Da Vinci popularizou a teoria de que Maria Madalena carregava o filho de Jesus — ficção que acendeu debates históricos e teológicos reais.",
+            },
+          ],
+          refs: [
+            {
+              book: "Lucas 8:2",
+              desc: "Mencionada como alguém de quem Jesus expulsou sete demônios — única informação biográfica direta",
+            },
+            {
+              book: "João 20:1–18",
+              desc: 'O encontro com o ressuscitado no jardim — a cena do "Noli me tangere"',
+            },
+            {
+              book: "Evangelho de Maria",
+              desc: "Texto gnóstico do séc. II que a apresenta como líder espiritual e receptora de revelações especiais",
+            },
+          ],
+        },
+        judas: {
+          color: "#6B1A1A",
+          align: "Ambíguo",
+          period: "Séc. I d.C. · Queriote / Judeia",
+          name: "Judas Iscariotes",
+          subtitle: "O Traidor · O Instrumento",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Rembrandt_Harmensz._van_Rijn_-_Judas_returning_the_thirty_silver_pieces_-_WGA19117.jpg/400px-Rembrandt_Harmensz._van_Rijn_-_Judas_returning_the_thirty_silver_pieces_-_WGA19117.jpg",
+          quote: '"Pecai entregando sangue inocente."',
+          ref: "Mateus 27:4 — Judas diante dos sacerdotes",
+          bio: "Judas Iscariotes é o personagem mais controverso do Novo Testamento. Um dos doze apóstolos escolhidos por Jesus, foi o tesoureiro do grupo e o que entregou o Mestre por trinta moedas de prata. Mas a questão que atravessa dois milênios permanece: Judas agiu por ganância, desespero teológico ou — como sugere o Evangelho de Judas — por instrução do próprio Jesus? Seu suicídio e o remorso demonstrado o distinguem dos que o condenaram.",
+          symbolism: [
+            {
+              icon: "🪙",
+              text: "As trinta moedas de prata: o preço da traição — e da consciência, quando devolvidas com remorso",
+            },
+            {
+              icon: "💋",
+              text: "O beijo de Judas: a traição mais íntima possível — usar o gesto do amor como sinal da morte",
+            },
+            {
+              icon: "🪢",
+              text: "A morte pelo próprio enforcamento: o único apóstolo que não suportou o peso do que fez",
+            },
+            {
+              icon: "📜",
+              text: 'O Evangelho de Judas (gnóstico): ele recebe de Jesus a missão secreta de entregá-lo — o "traidor" como herói',
+            },
+          ],
+          perspectives: [
+            {
+              name: "Dante Alighieri",
+              view: "Na Divina Comédia, Judas está no centro do Inferno, sendo mastigado eternamente pelo próprio Lúcifer — o traidor máximo no pior círculo.",
+            },
+            {
+              name: "Evangelho de Judas (Gnóstico)",
+              view: "Jesus pede a Judas que o entregue para libertar sua alma do corpo material — tornando Judas o discípulo mais obediente e corajoso.",
+            },
+            {
+              name: "Teologia da Predestinação",
+              view: "Se Judas era necessário para o plano da Salvação, ele poderia ter agido diferentemente? O debate entre livre-arbítrio e providência tem em Judas seu caso mais extremo.",
+            },
+          ],
+          refs: [
+            {
+              book: "Mateus 26:14–16",
+              desc: "O acordo com os sacerdotes pelas trinta moedas de prata",
+            },
+            {
+              book: "João 13:27",
+              desc: '"O que tens a fazer, faze-o depressa" — Jesus à mesa da Última Ceia',
+            },
+            {
+              book: "Evangelho de Judas",
+              desc: "Texto gnóstico (séc. II) redescoberto em 2006 que inverte completamente seu papel",
+            },
+          ],
+        },
+        sansao: {
+          color: "#7A5A00",
+          align: "Ambíguo",
+          period: "Séc. XII a.C. · Israel / Filistia",
+          name: "Sansão",
+          subtitle: "O Herói Trágico · O Nazireu",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Guercino-Samson.jpg/400px-Guercino-Samson.jpg",
+          quote: '"Morra a minha alma com os filisteus!"',
+          ref: "Juízes 16:30 — Último ato de Sansão",
+          bio: "Consagrado a Deus antes mesmo de nascer, Sansão era dotado de força sobre-humana vinculada ao voto nazireno — o cabelo que nunca poderia ser cortado. Juiz de Israel, sua vida foi marcada pela contradição entre a missão divina e as fraquezas pessoais: paixões por mulheres filistinas, vinganças pessoais e impulsividade. Traído por Dalila, cego e acorrentado, encontrou sua grandeza máxima no momento da morte.",
+          symbolism: [
+            {
+              icon: "💈",
+              text: "O cabelo: fonte de força, símbolo do voto sagrado — a identidade espiritual que, perdida, significa a queda total",
+            },
+            {
+              icon: "🦁",
+              text: "O leão rasgado com as mãos nuas: a força além do humano, dom divino que excede toda lógica natural",
+            },
+            {
+              icon: "🏛",
+              text: "As colunas do templo: a morte como vitória — mais inimigos mortos na morte do que em vida",
+            },
+            {
+              icon: "💘",
+              text: "Dalila: o amor como vulnerabilidade radical — a fraqueza que toda força carrega dentro de si",
+            },
+          ],
+          perspectives: [
+            {
+              name: "John Milton",
+              view: 'Em "Sansão Agonistes" (1671), o herói cego e humilhado reflete sobre culpa, graça e redenção — uma meditação sobre a queda e o retorno ao propósito.',
+            },
+            {
+              name: "Psicologia Junguiana",
+              view: "Sansão personifica o herói que não integra sua Sombra — a força destrutiva que não é canalizada torna-se autossabotagem e queda.",
+            },
+            {
+              name: "Tradição Rabínica",
+              view: "Seu julgamento foi severo: usou a força de Deus para fins pessoais e paixões mundanas — a grandeza desperdiçada é a tragédia mais amarga.",
+            },
+          ],
+          refs: [
+            {
+              book: "Juízes 13–16",
+              desc: "Natividade miraculosa, feitos heroicos, traição de Dalila e morte final",
+            },
+            {
+              book: "John Milton",
+              desc: '"Sansão Agonistes" (1671) — poema dramático sobre a redenção na humilhação',
+            },
+            {
+              book: "Hebreus 11:32",
+              desc: "Sansão listado entre os heróis da fé no Novo Testamento",
+            },
+          ],
+        },
+        lucifer: {
+          color: "#3D1A5C",
+          align: "Sombra",
+          period: "Antes dos Tempos · Céu / Sheol",
+          name: "Lúcifer",
+          subtitle: "O Portador da Luz · O Adversário",
+          photo:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Guillaume_Geefs_-_Le_g%C3%A9nie_du_mal_%28Luc%C3%ADfer%29.jpg/400px-Guillaume_Geefs_-_Le_g%C3%A9nie_du_mal_%28Luc%C3%ADfer%29.jpg",
+          quote: '"Subirei ao céu... serei semelhante ao Altíssimo."',
+          ref: "Isaías 14:13–14 — A queda do rei da Babilônia / Lúcifer",
+          bio: 'O nome "Lúcifer" — Portador da Luz, Estrela da Manhã — aparece apenas uma vez na Bíblia (Is 14:12), como metáfora da queda do rei da Babilônia. A tradição cristã posterior identificou-o com Satanás e com a rebelião angelical descrita em textos apócrifos. Sua figura evoluiu de acusador divino a arquétipo do mal absoluto, da rebeldia romântica ao poder das trevas. Em Milton, tornou-se o herói trágico mais eloquente da literatura ocidental.',
+          symbolism: [
+            {
+              icon: "⭐",
+              text: "Estrela da Manhã (Vênus): o mais belo e brilhante dos astros, que desaparece ao amanhecer — beleza que não suporta a luz plena",
+            },
+            {
+              icon: "🪶",
+              text: "As asas quebradas: a queda do mais alto ponto possível — o orgulho como origem de toda ruína",
+            },
+            {
+              icon: "🐍",
+              text: "A serpente do Éden: identificação tardia, mas que moldou toda a iconografia do mal ocidental",
+            },
+            {
+              icon: "🎭",
+              text: "O Romantismo o transformou em herói da rebeldia — de Dante a Milton, de Blake a Baudelaire, Lúcifer é o rebelde sublime",
+            },
+          ],
+          perspectives: [
+            {
+              name: "John Milton",
+              view: 'No "Paraíso Perdido", Satanás é o personagem mais complexo e eloquente — "Melhor reinar no Inferno do que servir no Céu" tornou-se a voz do orgulho trágico.',
+            },
+            {
+              name: "William Blake",
+              view: "Lúcifer/Satanás de Milton era o verdadeiro herói — o Gênio da Energia contra a tirania da razão divina. Blake adorava o rebelde.",
+            },
+            {
+              name: "Teologia Cristã Ortodoxa",
+              view: "Lúcifer é o anjo que escolheu o não-ser ao ser — não o oposto de Deus, mas a ausência de Deus, o vazio que se faz de pleno.",
+            },
+          ],
+          refs: [
+            {
+              book: "Isaías 14:12–15",
+              desc: 'Única ocorrência de "Lúcifer" na Bíblia — poema sobre a queda do rei da Babilônia',
+            },
+            {
+              book: "Ezequiel 28:12–17",
+              desc: "O querubim perfeito que caiu pelo orgulho — associado por tradição a Lúcifer",
+            },
+            {
+              book: "John Milton",
+              desc: '"Paraíso Perdido" (1667) — a versão literária mais influente da queda angelical',
+            },
+          ],
+        },
+      };
+
+      function openModal(id) {
+        const d = DATA[id];
+        const modal = document.getElementById("smodal");
+        modal.style.setProperty("--mc", d.color);
+
+        document.getElementById("modal-icon").textContent =
+          ICONS[d.align] || "✝";
+        document.getElementById("modal-icon").style.background = d.color;
+        document.getElementById("modal-photo").src = d.photo;
+        document.getElementById("modal-photo").alt = d.name;
+        document.getElementById("modal-period").textContent = d.period;
+        document.getElementById("modal-name").textContent = d.name;
+        document.getElementById("modal-subtitle").textContent = d.subtitle;
+        document.getElementById("modal-quote").textContent = d.quote;
+        document.getElementById("modal-ref").textContent = d.ref;
+        document.getElementById("modal-bio").textContent = d.bio;
+
+        // Symbolism
+        document.getElementById("modal-sym").innerHTML = d.symbolism
+          .map(
+            (s) =>
+              `<div class="m-sym-item">
+      <div class="m-sym-icon">${s.icon}</div>
+      <p class="m-sym-text">${s.text}</p>
+    </div>`,
+          )
+          .join("");
+
+        // Perspectives
+        document.getElementById("modal-persp-intro").textContent =
+          `Como diferentes tradições e pensadores interpretaram ${d.name}:`;
+        document.getElementById("modal-persp").innerHTML = d.perspectives
+          .map(
+            (p) =>
+              `<div class="m-persp-item">
+      <div class="m-persp-marker"></div>
+      <div>
+        <p class="m-persp-source">${p.name}</p>
+        <p class="m-persp-view">${p.view}</p>
+      </div>
+    </div>`,
+          )
+          .join("");
+
+        // Refs
+        document.getElementById("modal-refs").innerHTML = d.refs
+          .map(
+            (r) =>
+              `<div class="m-ref-item">
+      <span class="m-ref-book">${r.book}</span>
+      <span class="m-ref-desc">${r.desc}</span>
+    </div>`,
+          )
+          .join("");
+
+        switchTab("bio", document.querySelector(".modal-tab"));
+        document.getElementById("overlay").classList.add("open");
+        document.body.style.overflow = "hidden";
+        modal.scrollTop = 0;
+      }
+
+      function closeModal() {
+        document.getElementById("overlay").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      function closeOut(e) {
+        if (e.target === document.getElementById("overlay")) closeModal();
+      }
+      function switchTab(tab, btn) {
+        document
+          .querySelectorAll(".mpanel")
+          .forEach((p) => p.classList.remove("active"));
+        document
+          .querySelectorAll(".modal-tab")
+          .forEach((b) => b.classList.remove("active"));
+        document.getElementById("panel-" + tab).classList.add("active");
+        btn.classList.add("active");
+      }
+      function filterEntries(align, btn) {
+        document
+          .querySelectorAll(".pill")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.querySelectorAll(".entry").forEach((e) => {
+          if (align === "todos" || e.dataset.align === align)
+            e.classList.remove("hidden");
+          else e.classList.add("hidden");
+        });
+      }
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
+    </script>
+  </body>
+</html>
